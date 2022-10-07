@@ -12,8 +12,8 @@ export default function SideBar() {
           {/* <CardHeader>Menu</CardHeader> */}
           <CardBody>
       <p onClick={()=> navigate("/report")} className="coups">Report</p>
-      <p className='coups'>Balance</p>
-      <p className='coups'>Report</p>
+      <p className='coups'>Add Shop</p>
+      <p className='coups'>Payment</p>
 
           </CardBody>
         {/* </Card> */}

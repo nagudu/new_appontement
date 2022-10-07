@@ -135,7 +135,7 @@ export default function PayRent() {
 
 
                             <Col md={6}>
-                                <Label>Year</Label>
+                                <Label>Month</Label>
                                 <Input type='date'
                                     name='year'
                                     value={form.year}

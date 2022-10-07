@@ -72,7 +72,7 @@ export default function ShopsList() {
                                             onClick={() => navigate(`/pay_rent?id=${item.id}`)}
                                             color="primary"
                                         >
-                                            <center><b className='coups'>Pay</b></center></p>
+                                            <center><b className='coups'>Payment</b></center></p>
                                         </td>
                                     </tr>
                                 )}
