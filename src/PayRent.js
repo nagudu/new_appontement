@@ -12,6 +12,7 @@ export default function PayRent() {
         year: "",
         amount_paid: "",
         discription: "",
+        
     }
     const [form, setForm] = useState(_form)
     const [data, setData] = useState([])
@@ -39,9 +40,11 @@ export default function PayRent() {
 
 
     }
+let _shop_no = result.shop_no
     useEffect(() => {
         handleFetch()
-    }, [0])
+        setForm((p)=>({...p,shop_no: _shop_no}))
+    }, [0,_shop_no])
     const handleAdd = () => {
         const obj = {
             ...form,
@@ -49,7 +52,7 @@ export default function PayRent() {
             name: result.name,
             shop_no: result.shop_no
         }
-        _postApi("payment_report", obj, () => {
+        _postApi(`payment_report?custormer_id=${id}`, obj, () => {
             setForm(_form)
         },
             (err) => console.log(err)
@@ -67,7 +70,7 @@ export default function PayRent() {
                             color="primary"
                         >
                             Back
-                        </Button > */}
+                        </Button> */}
                         {/* <center><b>Rent Pay</b></center>
                     </CardHeader> */}
                     <CustomCardHeader text='Back' header='Rent Pay' />
@@ -79,6 +82,7 @@ export default function PayRent() {
                         >
                             Report
                         </Button>
+                        {/* {JSON.stringify(result)} */}
                         <Row className='mt-3'>
 
                             <Col md={4}>
@@ -145,12 +149,12 @@ export default function PayRent() {
                             {/* <Col md={3}></Col> */}
                             <Col md={3}>
                                 <Label className='mt-4'>
-                                    <b>Preniums Balance</b>_____________
+                                    <b>Preniums Balance :</b> {result.amount_paid}
                                 </Label>
                             </Col>
                             <Col md={3}>
                                 <Label className='mt-4'>
-                                    <b>Current Balance</b>_____________
+                                    <b>Current Balance :</b> {result.amount_paid - form.amount_paid}
                                 </Label>
                             </Col>
                             <Col md={6}>
