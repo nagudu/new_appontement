@@ -77,8 +77,8 @@ let _shop_no = result.shop_no
                     <CardBody>
                         <Button
                             onClick={() => navigate(`/report?id=${result.id}`)}
-                            style={{ marginLeft: "65rem" }}
-                            color="primary"
+                            style={{ marginLeft: "55rem" }}
+                            // color="primary"
                         >
                             Report
                         </Button>
@@ -149,7 +149,7 @@ let _shop_no = result.shop_no
                             {/* <Col md={3}></Col> */}
                             <Col md={3}>
                                 <Label className='mt-4'>
-                                    <b>Preniums Balance :</b> {result.amount_paid}
+                                    <b>Previous Balance :</b> {result.amount_paid}
                                 </Label>
                             </Col>
                             <Col md={3}>
@@ -179,7 +179,7 @@ let _shop_no = result.shop_no
                             <Button
                                 className='mt-3'
                                 onClick={handleAdd}
-                                color="primary"
+                                // color="primary"
                             >
                                 Save
                             </Button>

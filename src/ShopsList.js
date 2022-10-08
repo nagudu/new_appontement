@@ -31,7 +31,7 @@ export default function ShopsList() {
                     <CardBody>
                         <Button
                             onClick={() => navigate("/shopregistratin")}
-                            color="primary"
+                        // color="primary"
                         >Add Shop</Button>
                         <Row>
 
@@ -68,11 +68,11 @@ export default function ShopsList() {
                                         <td>{item.rent_start_date}</td>
                                         <td>{item.rent_end_date}</td>
                                         <td><p
-                                        style={{}}
+                                            style={{}}
                                             onClick={() => navigate(`/pay_rent?id=${item.id}`)}
                                             color="primary"
                                         >
-                                            <center><b className='coups'>Payment</b></center></p>
+                                            <center><b className='pay'>Payment</b></center></p>
                                         </td>
                                     </tr>
                                 )}

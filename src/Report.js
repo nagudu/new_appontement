@@ -67,7 +67,7 @@ export default function Report() {
                                 <thead>
                                     <tr>
                                         <th>Name</th>
-                                        <th>Amount</th>
+                                        <th>Amount Paid</th>
                                         <th>Date</th>
                                     </tr>
                                 </thead>

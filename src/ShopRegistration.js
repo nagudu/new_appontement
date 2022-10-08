@@ -40,7 +40,7 @@ export default function ShopRegistration() {
                             <Button
                                 style={{ marginRight: "67rem" }}
                                 onClick={() => navigate("/")}
-                                color="primary"
+                                // color="primary"
                             >
                                 Back
                             </Button>
@@ -116,7 +116,7 @@ export default function ShopRegistration() {
                             <Button
                                 className='mt-2'
                                 onClick={handleAdd}
-                                color="primary"
+                                // color="primary"
                             >
                                 Save
                             </Button>
