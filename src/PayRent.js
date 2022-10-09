@@ -50,7 +50,8 @@ let _shop_no = result.shop_no
             ...form,
             customer_id: id,
             name: result.name,
-            shop_no: result.shop_no
+            shop_no: result.shop_no,
+            shop_name: result.shop_name
         }
         _postApi(`payment_report?custormer_id=${id}`, obj, () => {
             setForm(_form)
@@ -63,16 +64,7 @@ let _shop_no = result.shop_no
         <div>
             <Container className='mt-3'>
                 <Card>
-                    {/* <CardHeader> */}
-                        {/* <Button
-                            style={{ marginRight: "65rem" }}
-                            onClick={() => navigate(`/pay_rent?id=${result.id}`)}
-                            color="primary"
-                        >
-                            Back
-                        </Button> */}
-                        {/* <center><b>Rent Pay</b></center>
-                    </CardHeader> */}
+                
                     <CustomCardHeader text='Back' header='Rent Pay' />
                     <CardBody>
                         <Button
@@ -92,6 +84,12 @@ let _shop_no = result.shop_no
                                 <Label>
                                     <b>Phone:  </b>
                                     {result.phone}
+                                </Label>
+                            </Col>
+                            <Col md={4}>
+                                <Label>
+                                    <b>Shop Name:  </b>
+                                    {result.shop_name}
                                 </Label>
                             </Col>
                             <Col md={4}>
@@ -136,6 +134,7 @@ let _shop_no = result.shop_no
                                     {result.discription}
                                 </Label>
                             </Col>
+                            <Col md={8}></Col>
 
 
                             <Col md={6}>

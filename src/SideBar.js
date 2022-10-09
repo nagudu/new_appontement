@@ -8,8 +8,12 @@ export default function SideBar() {
     <div className='' style={{}}>
       <CardBody>
         <p onClick={() => navigate("/report")} className="coups">Report</p>
-        <p className='coups' onClick={() => navigate("/shopregistratin")}>Add Shop</p>
-        <p className='coups'>Payment</p>  
+        <p className='coups' onClick={() => navigate("/tenant")}>Tenants</p>
+        <p className='coups' onClick={() => navigate("/managers")}>Managers</p>  
+        <p className='coups' onClick={() => navigate("/shops_list")}>Add Shop</p>
+        <p className='coups' onClick={() => navigate("/plaza")}>Plaza</p>
+        {/* <p className='coups'>Payment</p>   */}
+        <p className='coups' onClick={() => navigate("/setting")}>Setting</p>  
       </CardBody>
     </div>
   )

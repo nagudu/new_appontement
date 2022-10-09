@@ -1,6 +1,7 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
+import _fetchApi from './api'
 import { _postApi } from './apiCall'
 
 export default function ShopRegistration() {
@@ -8,6 +9,7 @@ export default function ShopRegistration() {
     const _form = {
         name: "",
         phone: "",
+        shop_name: "",
         shop_no: "",
         quantity: "",
         member_of_pillars: "",
@@ -20,7 +22,9 @@ export default function ShopRegistration() {
     const handleAdd = () => {
         _postApi("shop_registration", form, () => {
             setForm(_form)
+            navigate(-1)
         },
+            
             (err) => console.log(err)
         )
         console.log(_form)
@@ -31,6 +35,23 @@ export default function ShopRegistration() {
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }));
     }
+    const [setting, setSetting] = useState([])
+    const handleFetch = () => {
+        _fetchApi(
+            `http://localhost:34567/getsetting`,
+            (data) => {
+                if (data.success) {
+                }
+                console.log(data.results)
+                setSetting(data.results[0])
+            }
+        )
+
+
+    }
+    useEffect(() => {
+        handleFetch()
+    }, [])
     return (
         <div>
             <Container className='mt-3'>
@@ -39,8 +60,8 @@ export default function ShopRegistration() {
                         <CardHeader>
                             <Button
                                 style={{ marginRight: "67rem" }}
-                                onClick={() => navigate("/")}
-                                // color="primary"
+                                onClick={() => navigate("/shops_list")}
+                            // color="primary"
                             >
                                 Back
                             </Button>
@@ -61,6 +82,19 @@ export default function ShopRegistration() {
                                 <Input type='number' name='phone'
                                     value={form.phone}
                                     onChange={handleChange} />
+                            </Col>
+                            <Col md={6}>
+                                <Label>Shop Name</Label>
+                                <Input type='select' name='shop_name'
+                                    value={form.shop_name}
+                                    onChange={handleChange} >
+                                    {
+                                        setting && setting.map((i) =>
+                                            <option>{i.shop_name}</option>
+                                        )
+                                    }
+                                    <option></option>
+                                </Input>
                             </Col>
                             <Col md={6}>
                                 <Label>Shop No</Label>
@@ -116,7 +150,7 @@ export default function ShopRegistration() {
                             <Button
                                 className='mt-2'
                                 onClick={handleAdd}
-                                // color="primary"
+                            // color="primary"
                             >
                                 Save
                             </Button>
