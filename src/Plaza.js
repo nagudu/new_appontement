@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
+import {AiOutlinePlusCircle} from 'react-icons/ai'
+import {GrFormView} from 'react-icons/gr'
 
 export default function Plaza() {
     const navigate = useNavigate()
@@ -30,7 +32,10 @@ export default function Plaza() {
                     <center><CardHeader>Plaza</CardHeader></center>
                     <CardBody>
                             <Button 
+                            color='primary'
                             onClick={() => navigate("/add_new_plaza")}>
+                                <AiOutlinePlusCircle size='1.5em'/>
+                           {" "} 
                                 Add New Plaza
                                 </Button>
                         <Row className='mt-3'>
@@ -42,6 +47,7 @@ export default function Plaza() {
                                         <th>Address</th>
                                         {/* <th>Manager ID</th> */}
                                         <th>Code</th>
+                                        <th>No Of Shop</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -52,7 +58,15 @@ export default function Plaza() {
                                         <td>{item.name}</td>
                                         <td>{item.address}</td>
                                         <td>{item.code}</td>
-                                        <td><Button>View</Button></td>
+                                        <td>{item.no_of_shop}</td>
+                                        <td><Button
+                                        color='primary'
+                                        onClick={() => navigate(`/plaza_view?id=${item.id}`)}>
+                                            <GrFormView size='1.5em' color='white'/>
+                                                {" "}
+                                            View
+                                            </Button>
+                                            </td>
                                         
                                        
                                     </tr>

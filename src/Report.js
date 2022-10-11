@@ -42,12 +42,12 @@ export default function Report() {
         <div>
             <Container className='mt-4'>
                 <Card>
-                    {/* <CardHeader>
-                        <CustomButton text="Back" />
+                    <CardHeader>
                         <p className='text-center text-dark mb-2'>Payment Report </p>
-                    </CardHeader> */}
-                    <CustomCardHeader text='Back' header='Payment Report' />
+                    </CardHeader>
+                    {/* <CustomCardHeader text='Back' header='Payment Report' /> */}
                     <CardBody>
+                        {/* <Button color='primary'>Back</Button> */}
                         <Row>
                             <Col md={6}>
                                 <Label>From</Label>

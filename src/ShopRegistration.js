@@ -3,12 +3,13 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
 import _fetchApi from './api'
 import { _postApi } from './apiCall'
+import {BsArrowLeft} from 'react-icons/bs'
 
 export default function ShopRegistration() {
     const navigate = useNavigate()
     const _form = {
         name: "",
-        phone: "",
+        // phone: "",
         shop_name: "",
         shop_no: "",
         quantity: "",
@@ -17,14 +18,14 @@ export default function ShopRegistration() {
         rent_end_date: "",
         rent_fee: "",
         amount_paid: "",
-        discription: "",
+        // discription: "",
     }
     const handleAdd = () => {
         _postApi("shop_registration", form, () => {
             setForm(_form)
             navigate(-1)
         },
-            
+
             (err) => console.log(err)
         )
         console.log(_form)
@@ -58,31 +59,32 @@ export default function ShopRegistration() {
                 <Card>
                     <center>
                         <CardHeader>
-                            <Button
-                                style={{ marginRight: "67rem" }}
-                                onClick={() => navigate("/shops_list")}
-                            // color="primary"
-                            >
-                                Back
-                            </Button>
                             <center><b>Shop Registration</b></center>
                         </CardHeader>
                     </center>
                     <CardBody>
+                            <Button
+                                style={{ marginRight: "67rem" }}
+                                onClick={() => navigate("/")}
+                                color="primary"
+                            >
+                        <BsArrowLeft size='1.5em'/>
+                                  {' '}Back
+                            </Button>
 
-                        <Row className='mt-2'>
+                        <Row className='mt-3'>
                             <Col md={6}>
                                 <Label>Name</Label>
                                 <Input type='text' name='name'
                                     value={form.name}
                                     onChange={handleChange} />
                             </Col>
-                            <Col md={6}>
+                            {/* <Col md={6}>
                                 <Label>Phone No</Label>
                                 <Input type='number' name='phone'
                                     value={form.phone}
                                     onChange={handleChange} />
-                            </Col>
+                            </Col> */}
                             <Col md={6}>
                                 <Label>Shop Name</Label>
                                 <Input type='select' name='shop_name'
@@ -139,18 +141,18 @@ export default function ShopRegistration() {
                                     value={form.amount_paid}
                                     onChange={handleChange} />
                             </Col>
-                            <Col md={6}>
+                            {/* <Col md={6}>
                                 <Label>Discription</Label>
                                 <Input type='text' name='discription'
                                     value={form.discription}
                                     onChange={handleChange} />
-                            </Col>
+                            </Col> */}
                         </Row>
                         <center>
                             <Button
-                                className='mt-2'
+                                className='mt-3'
                                 onClick={handleAdd}
-                            // color="primary"
+                                color="primary"
                             >
                                 Save
                             </Button>

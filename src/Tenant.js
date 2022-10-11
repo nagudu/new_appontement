@@ -2,15 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
-import CustomButton from './CustomButton'
+// import CustomButton from './CustomButton'
+import {AiOutlinePlusCircle} from 'react-icons/ai'
+import {GrFormView} from 'react-icons/gr'
 
 export default function Tenant() {
+    const navigate = useNavigate()
     
     const [result, setResult] = useState([])
     const navagite = useNavigate()
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getTenant`,
+            `http://localhost:34567/getTenantList`,
             (data) => {
                 if (data.success) {
                 }
@@ -30,7 +33,10 @@ export default function Tenant() {
                 <Card>
                     <center><CardHeader>Tenant</CardHeader></center>
                     <CardBody>
-                        <Button onClick={() => navagite("/tenant_registration")}>Add New Tenant</Button>
+                        <Button color='primary' onClick={() => navagite("/tenant_registration")}>
+                        <AiOutlinePlusCircle size='1.5em'/>
+                           {" "} Add New Tenant
+                            </Button>
                         <Row className='mt-3'>
                             <Table bordered>
                                 <thead>
@@ -51,7 +57,15 @@ export default function Tenant() {
                                     <td>{item.phone_no}</td>
                                     <td>{item.email}</td>
                                     <td>{item.address}</td>
-                                    <td><Button>View</Button></td>
+                                    <td><Button
+                                    color='primary'
+                                     onClick={() => navigate(`/tenant_view?id=${item.id}`)} 
+                                     >
+                                        <GrFormView size='1.5em'/>
+                                                {" "}
+                                        View 
+                                     </Button>
+                                     </td>
                                     </tr>
                                     )}
                                 </tbody>

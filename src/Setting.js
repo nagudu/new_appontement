@@ -100,7 +100,9 @@ export default function Setting() {
                         <center>
                             <Button
                             onClick={handleAdd}
-                                className='mt-3'>
+                                className='mt-3'
+                                color='primary'
+                                >
                                 Submit
                             </Button>
                         </center>

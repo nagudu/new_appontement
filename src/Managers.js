@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
-import CustomButton from './CustomButton'
+// import CustomButton from './CustomButton'
+import {GrFormView} from "react-icons/gr"
+import {AiOutlinePlusCircle} from "react-icons/ai"
 
 export default function Managers() {
-    
+
     const [result, setResult] = useState([])
     const navagite = useNavigate()
     const handleFetch = () => {
@@ -30,7 +32,13 @@ export default function Managers() {
                 <Card>
                     <center><CardHeader>Managers</CardHeader></center>
                     <CardBody>
-                        <Button onClick={() => navagite("/managers_user")}>Add New Managers</Button>
+                        <Button color='primary'
+                            onClick={() => navagite("/managers_user")}
+                        >
+                            <AiOutlinePlusCircle size='1.5em'/>
+                           {" "} 
+                            Add New Managers
+                        </Button>
                         <Row className='mt-3'>
                             <Table bordered>
                                 <thead>
@@ -45,14 +53,22 @@ export default function Managers() {
                                 </thead>
                                 <tbody>
                                     {result.map((item, index) =>
-                                    <tr>
-                                    <td>{index+1}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.phone_no}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.address}</td>
-                                    <td><Button>View</Button></td>
-                                    </tr>
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.phone_no}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.address}</td>
+                                            <td><Button
+                                                color='primary'
+                                                onClick={()=> navagite('/manager_view')}
+                                            >
+                                                <GrFormView size='1.5em' color='white'/>
+                                                {" "}
+                                                View
+                                            </Button>
+                                            </td>
+                                        </tr>
                                     )}
                                 </tbody>
                             </Table>

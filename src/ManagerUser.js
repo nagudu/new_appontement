@@ -76,6 +76,7 @@ export default function ManagerUser() {
 
                         </Row>
                         <center><Button
+                        color='primary'
                             className='mt-3'
                             onClick={handleAdd}>Submit</Button></center>
                     </CardBody>

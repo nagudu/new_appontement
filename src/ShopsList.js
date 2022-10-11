@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table, Tag } from 'reactstrap'
 import _fetchApi from './api'
+import {AiOutlinePlusCircle, AiOutlineSearch} from 'react-icons/ai'
 
 export default function ShopsList() {
     const navigate = useNavigate()
@@ -12,9 +13,9 @@ export default function ShopsList() {
             `http://localhost:34567/get_shop_list`,
             (data) => {
                 if (data.success) {
+                    console.log(data.results)
+                    setResult(data.results[0])
                 }
-                console.log(data.results)
-                setResult(data.results[0])
             }
         )
 
@@ -31,8 +32,10 @@ export default function ShopsList() {
                     <CardBody>
                         <Button
                             onClick={() => navigate("/shopregistratin")}
-                        // color="primary"
-                        >Add Shop</Button>
+                        color="primary"
+                        >
+                            <AiOutlinePlusCircle size='1.5em'/>
+                            {" "} Add Shop</Button>
                         <Row>
 
 
@@ -49,7 +52,7 @@ export default function ShopsList() {
                             <thead>
                                 <tr>
                                     <th>Name</th>
-                                    <th>Phone</th>
+                                    {/* <th>Phone</th> */}
                                     <th>Amount Paid</th>
                                     {/* <th>Pillars No</th> */}
                                     <th>Start Date</th>
@@ -62,7 +65,7 @@ export default function ShopsList() {
                                 {result.map((item) =>
                                     <tr>
                                         <td>{item.name}</td>
-                                        <td>{item.phone}</td>
+                                        {/* <td>{item.phone}</td> */}
                                         <td>{item.amount_paid}</td>
                                         {/* <td>{item.member_of_pillars}</td> */}
                                         <td>{item.rent_start_date}</td>
@@ -72,7 +75,10 @@ export default function ShopsList() {
                                             onClick={() => navigate(`/pay_rent?id=${item.id}`)}
                                             color="primary"
                                         >
-                                            <center><b className='pay'>Payment</b></center></p>
+                                            <center>
+                                                <b className='pay'>Payment</b>
+                                                </center>
+                                                </p>
                                         </td>
                                     </tr>
                                 )}

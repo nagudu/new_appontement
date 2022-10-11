@@ -1,12 +1,16 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
 import { _postApi } from './apiCall'
+import {BsArrowLeft} from "react-icons/bs"
 
 export default function AddNewPlaza() {
+    const navigate = useNavigate()
+    const navagite = useNavigate()
     const _form = {
         name: "",
         address: "",
-        // manager_id: "",
+        no_of_shop: "",
         code: "",
     }
     const [form, setForm] = useState(_form)
@@ -18,6 +22,7 @@ export default function AddNewPlaza() {
     const handleAdd = () => {
         _postApi("plaza", form, () => {
             setForm(_form)
+            navagite(-1)
         },
             (err) => console.log(err)
         )
@@ -33,6 +38,15 @@ export default function AddNewPlaza() {
                         </CardHeader>
                     </center>
                     <CardBody>
+                    <Button
+                        onClick={() => navigate("/plaza")}
+                        color='primary'
+                        >
+                             <BsArrowLeft size='1.5em'/>
+                                  {' '}
+                           
+                            Back</Button>
+
                         <Row>
                             <Col md={6}>
                                 <Label>Name</Label>
@@ -46,12 +60,7 @@ export default function AddNewPlaza() {
                                     value={form.address}
                                     onChange={handleChange} />
                             </Col>
-                            {/* <Col md={6}>
-                                <Label>Manager</Label>
-                                <Input type='text' name='manager_id'
-                                    value={form.manager_id}
-                                    onChange={handleChange} />
-                            </Col> */}
+                          
                             <Col md={6}>
                                 <Label>Code</Label>
                                 <Input type='text'
@@ -59,9 +68,16 @@ export default function AddNewPlaza() {
                                     value={form.code}
                                     onChange={handleChange} />
                             </Col>
+                              <Col md={6}>
+                                <Label>No Of Shop</Label>
+                                <Input type='number' name='no_of_shop'
+                                    value={form.no_of_shop}
+                                    onChange={handleChange} />
+                            </Col>
                         </Row>
                         <center>
                             <Button className='mt-3'
+                            color='primary'
                                 onClick={handleAdd}>
                                 Save</Button>
                         </center>

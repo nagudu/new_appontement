@@ -4,14 +4,18 @@ import AddNewPlaza from '../AddNewPlaza';
 import Login from '../Login';
 import Managers from '../Managers';
 import ManagerUser from '../ManagerUser';
+import ManagerView from '../ManagerView';
 import PayRent from '../PayRent';
 import Plaza from '../Plaza';
+import PlazaPhases from '../PlazaPhases';
+import PlazaView from '../PlazaView';
 import Report from '../Report';
 import Setting from '../Setting';
 import ShopRegistration from '../ShopRegistration';
 import ShopsList from '../ShopsList';
 import Tenant from '../Tenant';
 import TenantRegistration from '../TenantRegistration';
+import TenantView from '../TenantView';
 import AppIndex from './AppIndex';
 
 function AppNavigation() {
@@ -34,7 +38,7 @@ function AppNavigation() {
             element: <AppIndex />,
             children: [
                 {
-                    path: '/shops_list',
+                    path: '/',
                     element: <ShopsList />
                 },
                 {
@@ -63,6 +67,10 @@ function AppNavigation() {
                     element: <TenantRegistration />
                 },
                 {
+                    path: '/tenant_view',
+                    element: <TenantView />
+                },
+                {
                     path: '/managers',
                     element: <Managers />
                 },
@@ -77,6 +85,18 @@ function AppNavigation() {
                 {
                     path: '/add_new_plaza',
                     element: <AddNewPlaza />
+                },
+                {
+                    path: '/plaza_view',
+                    element: <PlazaView />
+                },
+                {
+                    path: '/plaza_phases',
+                    element: <PlazaPhases />
+                },
+                {
+                    path: '/manager_view',
+                    element: <ManagerView />
                 },
             ]
 

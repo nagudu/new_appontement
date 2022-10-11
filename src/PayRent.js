@@ -6,6 +6,7 @@ import { _postApi } from './apiCall'
 import CustomButton from './CustomButton'
 import CustomCardHeader from './CustomCardHeader'
 import useQuery from './helper'
+import {BsArrowLeft} from "react-icons/bs"
 
 export default function PayRent() {
     const _form = {
@@ -64,13 +65,25 @@ let _shop_no = result.shop_no
         <div>
             <Container className='mt-3'>
                 <Card>
-                
-                    <CustomCardHeader text='Back' header='Rent Pay' />
+                    <center>
+                <CardHeader>
+                    Rent Pay
+                </CardHeader>
+                </center>
                     <CardBody>
+                        <Button
+                        color='primary'
+                        onClick={() => navigate("/")}
+                        >
+                            <BsArrowLeft size='1.5em'/>
+                                  {' '}
+                            Back
+                        </Button>
+                    {/* <CustomCardHeader text='Back' header='Rent Pay' /> */}
                         <Button
                             onClick={() => navigate(`/report?id=${result.id}`)}
                             style={{ marginLeft: "55rem" }}
-                            // color="primary"
+                            color="primary"
                         >
                             Report
                         </Button>
@@ -164,21 +177,21 @@ let _shop_no = result.shop_no
                                     onChange={handleChange}
                                 />
                             </Col>
-                            <Col md={6}>
+                            {/* <Col md={6}>
                                 <Label>Discription</Label>
                                 <Input type='text'
                                     name='discription'
                                     value={form.discription}
                                     onChange={handleChange}
                                 />
-                            </Col>
+                            </Col> */}
 
                         </Row>
                         <center>
                             <Button
                                 className='mt-3'
                                 onClick={handleAdd}
-                                // color="primary"
+                                color="primary"
                             >
                                 Save
                             </Button>
