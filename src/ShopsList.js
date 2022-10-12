@@ -14,7 +14,7 @@ export default function ShopsList() {
             (data) => {
                 if (data.success) {
                     console.log(data.results)
-                    setResult(data.results[0])
+                    setResult(data.results)
                 }
             }
         )

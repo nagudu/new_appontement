@@ -6,7 +6,7 @@ import {BsArrowLeft} from "react-icons/bs"
 
 export default function AddNewPlaza() {
     const navigate = useNavigate()
-    const navagite = useNavigate()
+    // const navagite = useNavigate()
     const _form = {
         name: "",
         address: "",
@@ -22,7 +22,7 @@ export default function AddNewPlaza() {
     const handleAdd = () => {
         _postApi("plaza", form, () => {
             setForm(_form)
-            navagite(-1)
+            navigate(-1)
         },
             (err) => console.log(err)
         )

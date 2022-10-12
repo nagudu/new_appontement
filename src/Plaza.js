@@ -4,6 +4,7 @@ import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'react
 import _fetchApi from './api'
 import {AiOutlinePlusCircle} from 'react-icons/ai'
 import {GrFormView} from 'react-icons/gr'
+import { BsEye } from 'react-icons/bs'
 
 export default function Plaza() {
     const navigate = useNavigate()
@@ -62,7 +63,7 @@ export default function Plaza() {
                                         <td><Button
                                         color='primary'
                                         onClick={() => navigate(`/plaza_view?id=${item.id}`)}>
-                                            <GrFormView size='1.5em' color='white'/>
+                                             <BsEye size='1em' color='white'/>
                                                 {" "}
                                             View
                                             </Button>

@@ -12,7 +12,7 @@ export default function ManagerView() {
                 <Card>
                     <center>
                         <CardHeader>
-                            Manager View
+                            Managers View
                         </CardHeader>
                     </center>
                     <CardBody>

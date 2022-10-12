@@ -5,6 +5,7 @@ import _fetchApi from './api'
 // import CustomButton from './CustomButton'
 import {AiOutlinePlusCircle} from 'react-icons/ai'
 import {GrFormView} from 'react-icons/gr'
+import { BsEye } from 'react-icons/bs'
 
 export default function Tenant() {
     const navigate = useNavigate()
@@ -59,9 +60,8 @@ export default function Tenant() {
                                     <td>{item.address}</td>
                                     <td><Button
                                     color='primary'
-                                     onClick={() => navigate(`/tenant_view?id=${item.id}`)} 
-                                     >
-                                        <GrFormView size='1.5em'/>
+                                     onClick={() => navigate(`/tenant_view?id=${item.id}`)}>
+                                         <BsEye size='1em' color='white'/>
                                                 {" "}
                                         View 
                                      </Button>

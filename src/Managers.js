@@ -5,6 +5,7 @@ import _fetchApi from './api'
 // import CustomButton from './CustomButton'
 import {GrFormView} from "react-icons/gr"
 import {AiOutlinePlusCircle} from "react-icons/ai"
+import { BsEye } from 'react-icons/bs'
 
 export default function Managers() {
 
@@ -37,7 +38,7 @@ export default function Managers() {
                         >
                             <AiOutlinePlusCircle size='1.5em'/>
                            {" "} 
-                            Add New Managers
+                            Add New Manager
                         </Button>
                         <Row className='mt-3'>
                             <Table bordered>
@@ -63,7 +64,7 @@ export default function Managers() {
                                                 color='primary'
                                                 onClick={()=> navagite('/manager_view')}
                                             >
-                                                <GrFormView size='1.5em' color='white'/>
+                                                <BsEye size='1em' color='white'/>
                                                 {" "}
                                                 View
                                             </Button>

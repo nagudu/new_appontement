@@ -16,6 +16,7 @@ import ShopsList from '../ShopsList';
 import Tenant from '../Tenant';
 import TenantRegistration from '../TenantRegistration';
 import TenantView from '../TenantView';
+import ViewPlzaPhases from '../ViewPlzaPhases';
 import AppIndex from './AppIndex';
 
 function AppNavigation() {
@@ -39,7 +40,7 @@ function AppNavigation() {
             children: [
                 {
                     path: '/',
-                    element: <ShopsList />
+                    element: <Plaza />
                 },
                 {
                     path: '/shopregistratin',
@@ -98,6 +99,10 @@ function AppNavigation() {
                     path: '/manager_view',
                     element: <ManagerView />
                 },
+                {
+                    path: '/view_plza_phases',
+                    element: <ViewPlzaPhases />
+                },ViewPlzaPhases
             ]
 
         },

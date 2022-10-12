@@ -4,24 +4,24 @@ import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row }
 import _fetchApi from './api'
 import { _postApi } from './apiCall'
 import {BsArrowLeft} from 'react-icons/bs'
+import useQuery from './helper'
 
 export default function ShopRegistration() {
+    const query = useQuery()
+    const phase_id = query.get('phase_id')
+    const phase_code = query.get('phase_code')
     const navigate = useNavigate()
     const _form = {
         name: "",
-        // phone: "",
-        shop_name: "",
-        shop_no: "",
-        quantity: "",
-        member_of_pillars: "",
+        code: phase_code,
+        rent_fee: "",
         rent_start_date: "",
         rent_end_date: "",
-        rent_fee: "",
-        amount_paid: "",
-        // discription: "",
+        tenant_id: "",
+        phase_id
     }
     const handleAdd = () => {
-        _postApi("shop_registration", form, () => {
+        _postApi("create_shop", form, () => {
             setForm(_form)
             navigate(-1)
         },
@@ -36,15 +36,15 @@ export default function ShopRegistration() {
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }));
     }
-    const [setting, setSetting] = useState([])
+    // const [setting, setSetting] = useState([])
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getsetting`,
+            `http://localhost:34567/getTenantList`,
             (data) => {
                 if (data.success) {
+                setData(data.results[0])
                 }
-                console.log(data.results)
-                setSetting(data.results[0])
+                console.log(data.results[0])
             }
         )
 
@@ -56,6 +56,8 @@ export default function ShopRegistration() {
     return (
         <div>
             <Container className='mt-3'>
+                
+            {/* {JSON.stringify(form)} */}
                 <Card>
                     <center>
                         <CardHeader>
@@ -64,8 +66,8 @@ export default function ShopRegistration() {
                     </center>
                     <CardBody>
                             <Button
-                                style={{ marginRight: "67rem" }}
-                                onClick={() => navigate("/")}
+                                // style={{ marginRight: "67rem" }}
+                                onClick={() => navigate(`/view_plza_phases?phase_id=${phase_id}`)}
                                 color="primary"
                             >
                         <BsArrowLeft size='1.5em'/>
@@ -74,46 +76,31 @@ export default function ShopRegistration() {
 
                         <Row className='mt-3'>
                             <Col md={6}>
-                                <Label>Name</Label>
+                                <Label>Shop Name</Label>
                                 <Input type='text' name='name'
                                     value={form.name}
                                     onChange={handleChange} />
                             </Col>
-                            {/* <Col md={6}>
-                                <Label>Phone No</Label>
-                                <Input type='number' name='phone'
-                                    value={form.phone}
-                                    onChange={handleChange} />
-                            </Col> */}
+                         
                             <Col md={6}>
-                                <Label>Shop Name</Label>
-                                <Input type='select' name='shop_name'
-                                    value={form.shop_name}
-                                    onChange={handleChange} >
-                                    {
+                                <Label>Shop Code</Label>
+                                <Input type='text' name='code'
+                                    value={form.code}
+                                    onChange={handleChange} />
+                                    {/* {
                                         setting && setting.map((i) =>
-                                            <option>{i.shop_name}</option>
+                                            <option>{i.name}</option>
                                         )
                                     }
-                                    <option></option>
-                                </Input>
+                                    <option></option> */}
+                                {/* </Input> */}
                             </Col>
+                          
+                            
                             <Col md={6}>
-                                <Label>Shop No</Label>
-                                <Input type='number' name='shop_no'
-                                    value={form.shop_no}
-                                    onChange={handleChange} />
-                            </Col>
-                            <Col md={6}>
-                                <Label>Quantity</Label>
-                                <Input type='number' name='quantity'
-                                    value={form.quantity}
-                                    onChange={handleChange} />
-                            </Col>
-                            <Col md={6}>
-                                <Label>Number Of Pillars</Label>
-                                <Input type='number' name='member_of_pillars'
-                                    value={form.member_of_pillars}
+                                <Label>Rent Fee</Label>
+                                <Input type='text' name='rent_fee'
+                                    value={form.rent_fee}
                                     onChange={handleChange} />
                             </Col>
                             <Col md={6}>
@@ -123,30 +110,26 @@ export default function ShopRegistration() {
                                     onChange={handleChange} />
                             </Col>
                             <Col md={6}>
-                                <Label>Rent Fee</Label>
-                                <Input type='text' name='rent_fee'
-                                    value={form.rent_fee}
-                                    onChange={handleChange} />
-                            </Col>
-                            <Col md={6}>
                                 <Label>Rent End Date</Label>
                                 <Input type='date' name='rent_end_date'
                                     value={form.rent_end_date}
                                     onChange={handleChange} />
                             </Col>
 
-                            <Col md={6}>
-                                <Label>Amount Paid</Label>
-                                <Input type='number' name='amount_paid'
-                                    value={form.amount_paid}
-                                    onChange={handleChange} />
+                        
+                              <Col md={6}>
+                                <Label>Tenant</Label>
+                                <Input type='select' name='tenant_id'
+                                    value={form.tenant_id}
+                                    onChange={handleChange} >
+                                            {
+                                        data && data.map((i) =>
+                                            <option value={i.id}>{i.name}</option>
+                                        )
+                                    }
+                                    <option></option> 
+                                        </Input>
                             </Col>
-                            {/* <Col md={6}>
-                                <Label>Discription</Label>
-                                <Input type='text' name='discription'
-                                    value={form.discription}
-                                    onChange={handleChange} />
-                            </Col> */}
                         </Row>
                         <center>
                             <Button
