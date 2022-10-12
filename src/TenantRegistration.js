@@ -1,5 +1,5 @@
 // import { ResultType } from '@remix-run/router/dist/utils'
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
@@ -52,41 +52,40 @@ export default function TenantRegistration() {
         fetchPlaza()
     }, [])
 
-    const fetchShop = () => {
+    const fetchShop = useCallback(() => {
         _fetchApi(
-            `http://localhost:34567/get-phase-shops`,
+            `http://localhost:34567/get-phase-shops?phase_id=${form.phase_id}`,
             (data) => {
                 if (data.success) {
                     setShop(data.results)
+                    console.log({ NAGUDU: data.results })
                 }
-                console.log({ NAGUDU: data.results })
             }
         )
-    }
+    }, [form.phase_id])
     useEffect(() => {
         fetchShop()
-    }, [])
+    }, [fetchShop])
 
-    const fetchPhase = () => {
-        _fetchApi(
-            `http://localhost:34567/get-plaza-phase-list`,
+    const fetchPhase = useCallback(() => {
+        _fetchApi(`http://localhost:34567/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
             (data) => {
                 if (data.success) {
                     setPhase(data.results)
                 }
-                console.log({ NAGUDU: data.results })
-            }
-        )
-    }
+            })
+
+    }, [form.plaza_id])
+
     useEffect(() => {
         fetchPhase()
-    }, [])
+    }, [fetchPhase])
 
     return (
         <div>
             <Container className='mt-3'>
                 <Card>
-                    {/* {JSON.stringify({phase,plaza,shop})} */}
+                    {JSON.stringify({ form })}
                     <center>
                         <CardHeader>
                             Tenant Registration
@@ -143,9 +142,11 @@ export default function TenantRegistration() {
                                     name='plaza_id'
                                     value={form.plaza_id}
                                     onChange={handleChange} >
+
+                                    <option value="">Select plaza</option>
                                     {
-                                        phase && phase.map((i) =>
-                                            <option>{i.name}</option>
+                                        plaza && plaza.map((i) =>
+                                            <option value={i.id}>{i.name}</option>
                                         )
                                     }
 
@@ -157,9 +158,11 @@ export default function TenantRegistration() {
                                     name='phase_id'
                                     value={form.phase_id}
                                     onChange={handleChange} >
+
+                                    <option value="">Select phase</option>
                                     {
-                                        plaza && plaza.map((i) =>
-                                            <option>{i.name}</option>
+                                        phase && phase.map((i) =>
+                                            <option value={i.id}>{i.name}</option>
                                         )
                                     }
                                 </Input>
@@ -170,9 +173,10 @@ export default function TenantRegistration() {
                                     name='shop_id'
                                     value={form.shop_id}
                                     onChange={handleChange} >
+                                    <option value="">Select shop</option>
                                     {
                                         shop && shop.map((i) =>
-                                            <option>{i.name}</option>
+                                            <option value={i.id}>{i.name}</option>
                                         )
                                     }
                                 </Input>
