@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 import { _postApi } from './apiCall'
-import {BsArrowLeft} from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 
 export default function TenantRegistration() {
     const navigate = useNavigate()
@@ -14,10 +14,16 @@ export default function TenantRegistration() {
         email: "",
         address: "",
         picture: "",
+        plaza_id: "",
+        phase_id: "",
+        shop_id: "",
     }
     const [form, setForm] = useState(_form)
     const [data, setData] = useState([])
     const [result, setResult] = useState([])
+    const [shop, setShop] = useState([])
+    const [phase, setPhase] = useState([])
+    const [plaza, setPlaza] = useState([])
 
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }))
@@ -31,25 +37,69 @@ export default function TenantRegistration() {
         )
         console.log(_form)
     }
+    const fetchPlaza = () => {
+        _fetchApi(
+            `http://localhost:34567/get-plaza-list`,
+            (data) => {
+                if (data.success) {
+                    setPlaza(data.results)
+                }
+                console.log({ NAGUDU: data.results })
+            }
+        )
+    }
+    useEffect(() => {
+        fetchPlaza()
+    }, [])
 
+    const fetchShop = () => {
+        _fetchApi(
+            `http://localhost:34567/get-phase-shops`,
+            (data) => {
+                if (data.success) {
+                    setShop(data.results)
+                }
+                console.log({ NAGUDU: data.results })
+            }
+        )
+    }
+    useEffect(() => {
+        fetchShop()
+    }, [])
+
+    const fetchPhase = () => {
+        _fetchApi(
+            `http://localhost:34567/get-plaza-phase-list`,
+            (data) => {
+                if (data.success) {
+                    setPhase(data.results)
+                }
+                console.log({ NAGUDU: data.results })
+            }
+        )
+    }
+    useEffect(() => {
+        fetchPhase()
+    }, [])
 
     return (
         <div>
             <Container className='mt-3'>
                 <Card>
+                    {/* {JSON.stringify({phase,plaza,shop})} */}
                     <center>
                         <CardHeader>
-                        Tenant Registration
+                            Tenant Registration
                         </CardHeader>
                     </center>
                     <CardBody>
                         <Button
-                        onClick={() => navigate("/tenant")}
-                        color='primary'
+                            onClick={() => navigate("/tenant")}
+                            color='primary'
                         >
-                             <BsArrowLeft size='1.5em'/>
-                                  {' '}
-                           
+                            <BsArrowLeft size='1.5em' />
+                            {' '}
+
                             Back</Button>
                         <Row className='mt-3'>
                             <Col md={6}>
@@ -87,14 +137,53 @@ export default function TenantRegistration() {
                                     value={form.picture}
                                     onChange={handleChange} />
                             </Col>
+                            <Col md={6}>
+                                <Label>Select Plaza</Label>
+                                <Input type='select'
+                                    name='plaza_id'
+                                    value={form.plaza_id}
+                                    onChange={handleChange} >
+                                    {
+                                        phase && phase.map((i) =>
+                                            <option>{i.name}</option>
+                                        )
+                                    }
 
+                                </Input>
+                            </Col>
+                            <Col md={6}>
+                                <Label>Plaza Phase</Label>
+                                <Input type='select'
+                                    name='phase_id'
+                                    value={form.phase_id}
+                                    onChange={handleChange} >
+                                    {
+                                        plaza && plaza.map((i) =>
+                                            <option>{i.name}</option>
+                                        )
+                                    }
+                                </Input>
+                            </Col>
+                            <Col md={6}>
+                                <Label>Select Shop</Label>
+                                <Input type='select'
+                                    name='shop_id'
+                                    value={form.shop_id}
+                                    onChange={handleChange} >
+                                    {
+                                        shop && shop.map((i) =>
+                                            <option>{i.name}</option>
+                                        )
+                                    }
+                                </Input>
+                            </Col>
                         </Row>
                         <center><Button
-                        color='primary'
+                            color='primary'
                             className='mt-3'
                             onClick={handleAdd}>
-                                Submit
-                                </Button></center>
+                            Submit
+                        </Button></center>
                     </CardBody>
                 </Card>
             </Container>
@@ -117,12 +206,12 @@ export default function TenantRegistration() {
                             </thead>
                             <tbody>
                                 {result.map((item) =>
-                                <tr>
-                                    <td>{item.id}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.code}</td>
-                                    <td>{item.no_of_shops}</td>
-                                </tr>
+                                    <tr>
+                                        <td>{item.id}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.code}</td>
+                                        <td>{item.no_of_shops}</td>
+                                    </tr>
                                 )}
                             </tbody>
                         </Table>

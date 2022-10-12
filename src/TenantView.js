@@ -65,6 +65,14 @@ export default function TenantView() {
 	useEffect(() => {
 		fetchPlazas()
 	}, [0])
+	
+	useEffect(() => {
+		fetchPlazaPhases()
+	}, [0])
+
+
+	
+
 	const [result, setResult] = useState([])
 	const handleFetch = () => {
 		_fetchApi(
@@ -144,6 +152,7 @@ export default function TenantView() {
 											<option>{i.name}</option>
 										)
 									}
+									<option>select</option>
 								</Input>
 							</Col>
 
@@ -158,6 +167,7 @@ export default function TenantView() {
 											<option>{i.name}</option>
 										)
 									}
+									<option>select</option>
 								</Input>
 							</Col>
 							<Col md={3} className="mt-3">
@@ -167,9 +177,10 @@ export default function TenantView() {
 									<option>---select---</option>
 									{
 										shops && shops.map((i) =>
-											<option>{i.name}</option>
+										<option>{i.name}</option>
 										)
 									}
+									<option>select</option>
 								</Input>
 							</Col>
 							<Col md={3} className="mt-5">

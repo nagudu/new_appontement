@@ -7,8 +7,8 @@ import _fetchApi from './api'
 import useQuery from './helper'
 // import moment from 'moment'
 export default function ViewPlzaPhases() {
-    const navigate =useNavigate()
-    
+    const navigate = useNavigate()
+
     const query = useQuery()
     const phase_id = query.get('phase_id')
     const phase_code = query.get('phase_code')
@@ -23,19 +23,19 @@ export default function ViewPlzaPhases() {
                 setData(data.results)
             }
         )
-    },[0])
+    }, [0])
 
     useEffect(() => {
         fetchPlazaPhases()
     }, [0])
-    
+
     return (
         <div>
             <Container className='mt-3'>
                 <Card>
                     <center><CardHeader>View Plaza Shops</CardHeader></center>
                     <CardBody>
-                    <Button
+                        <Button
                             color='primary'
                             onClick={() => navigate(-1)}>
                             <BsArrowLeft size='1.5em' />
@@ -63,16 +63,16 @@ export default function ViewPlzaPhases() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {data.map((item,i)=>(
-                                    <tr key={i}>
-                                        <td>{item.name}</td>
-                                        <td>{item.code}</td>
-                                        <td>{item.rent_fee}</td>
-                                        <td>{moment(item.rent_start_date).format('DD-MM-YYYY')}</td>
-                                        <td>{moment(item.rent_end_date).format('DD-MM-YYYY')}</td>
-                                        {item.tenant_name? <td>{item.tenant_name}</td>:
-                                           <td><Button >Add tenant </Button></td> }
-                                    </tr>))}
+                                    {data.map((item, i) => (
+                                        <tr key={i}>
+                                            <td>{item.name}</td>
+                                            <td>{item.code}</td>
+                                            <td>{item.rent_fee}</td>
+                                            <td>{moment(item.rent_start_date).format('DD-MM-YYYY')}</td>
+                                            <td>{moment(item.rent_end_date).format('DD-MM-YYYY')}</td>
+                                            {item.tenant_name ? <td>{item.tenant_name}</td> :
+                                                <td><Button >Add tenant </Button></td>}
+                                        </tr>))}
                                 </tbody>
                             </Table>
                         </Row>
