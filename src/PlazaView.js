@@ -133,7 +133,7 @@ export default function PlazaView() {
                                 </Label>
                             </Col>
                         </Row> : <Row>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Name</Label>
                                     <Input type="text"
@@ -142,7 +142,7 @@ export default function PlazaView() {
                                         onChange={handleChange} />
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Code</Label>
                                     <Input type="text"
@@ -150,7 +150,7 @@ export default function PlazaView() {
                                         value={form.code} onChange={handleChange} />
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >No of Shops</Label>
                                     <Input type="number"
@@ -159,7 +159,7 @@ export default function PlazaView() {
                                         onChange={handleChange} />
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Rent fee</Label>
                                     <Input type="number"
@@ -168,7 +168,7 @@ export default function PlazaView() {
                                         onChange={handleChange} />
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Rent start date</Label>
                                     <Input type="date"
@@ -177,7 +177,7 @@ export default function PlazaView() {
                                         onChange={handleChange} />
                                 </FormGroup>
                             </Col>
-                            <Col>
+                            <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Rent end date</Label>
                                     <Input type="date"

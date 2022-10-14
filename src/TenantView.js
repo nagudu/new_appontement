@@ -1,78 +1,109 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 import useQuery from './helper'
 import { BsArrowLeft } from "react-icons/bs"
+import { _postApi } from './apiCall'
+import moment from 'moment'
 
 export default function TenantView() {
+	const query = useQuery()
+	const id = query.get('id')
+	const today = moment().format('YYYY-MM-DD')
+	const due_date = moment(today).add('months',12).format('YYYY-MM-DD')
 	const navigate = useNavigate()
 	const _form = {
 		user_id: '',
 		shop_name: "",
 		plaza: "",
-		phase: ''
+		phase: '',
+		phase_id:'',
+		shop_id:'',
+		plaza_id:'',
+		tenant_id:id,
+		rent_start_date:today,
+		rent_end_date:due_date,
 	}
 	const [form, setForm] = useState(_form)
-	const query = useQuery()
-	const id = query.get('id')
-	const [setting, setSetting] = useState([])
+	const [shop_list, setShopList] = useState([])
 	const [plazas, setPlazas] = useState([])
 	// const navagite = useNavigate()
-	const [plaza_phases, setPlazaPhases] = useState([])
+	const [phases, setPhases] = useState([])
 	const [shops, setShops] = useState([])
+	const [tenant_shops, setTenantShops] = useState([])
 	// const navagite = useNavigate()
-	const fetchShops = () => {
+
+	const fetchTenantShops = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/get_shop_list`,
+		`http://localhost:34567/get-tenant-shops?tenant_id=${form.tenant_id}&query_type=select-tenant-shops`,
 			(data) => {
 				if (data.success) {
-					setShops(data.results[0])
-					console.log({ NAGUDU_SHOPS: data.results[0] })
+					setTenantShops(data.results)
+				}else{
+					setTenantShops([])
 				}
 			}
 		)
-	}
-	// const navagite = useNavigate()
-	const fetchPlazaPhases = () => {
+	},[form.tenant_id])
+
+
+
+	const fetchShops = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/get-plaza-phase-list`,
+			`http://localhost:34567/get-phase-shops?phase_id=${form.phase_id}`,
 			(data) => {
 				if (data.success) {
-					setPlazaPhases(data.results)
+					setShops(data.results)
+				}else{
+					setShops([])
 				}
-				console.log({ NAGUDU: data.results })
 			}
 		)
-	}
-	useEffect(() => {
-		fetchShops()
-	}, [0])
-	useEffect(() => {
-		fetchPlazaPhases()
-	}, [0])
+	},[form.phase_id])
+	// const navagite = useNavigate()
+	const fetchPlazaPhases = useCallback(() => {
+		_fetchApi(`http://localhost:34567/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
+			(resp) => {
+				if (resp.success) {
+					setPhases(resp.results)
+				}else{
+					setPhases([])
+				}
+			})
+
+	}, [form.plaza_id])
+
+
 	const fetchPlazas = () => {
 		_fetchApi(
 			`http://localhost:34567/get-plaza-list`,
 			(data) => {
 				if (data.success) {
 					setPlazas(data.results)
+				}else{
+					setPlazas([])
 				}
-				console.log({ NAGUDU: data.results })
 			}
 		)
 	}
+
+	useEffect(() => {
+		fetchShops()
+	}, [fetchShops])
+
+	useEffect(() => {
+		fetchPlazaPhases()
+	}, [fetchPlazaPhases])
+
 	useEffect(() => {
 		fetchPlazas()
 	}, [0])
 	
 	useEffect(() => {
-		fetchPlazaPhases()
-	}, [0])
-
-
+		fetchTenantShops()
+	}, [fetchTenantShops])
 	
-
 	const [result, setResult] = useState([])
 	const handleFetch = () => {
 		_fetchApi(
@@ -87,18 +118,46 @@ export default function TenantView() {
 			}
 		)
 	}
+
 	const handleChange = ({ target: { name, value } }) => {
+		if(name==='plaza_id'){
+			let selected_plaza = plazas.filter(p=>p.id==value)
+			console.error({selected_plaza});
+			setForm((p)=>({...p, plaza_name: selected_plaza.length? selected_plaza[0].name:""}))
+		}else if(name==='shop_id'){
+			let selected_shop = shops.filter(p=>p.id==value)
+			console.error({selected_shop});
+			setForm((p)=>({...p, shop_name: selected_shop.length? selected_shop[0].code:"", rent_fee:selected_shop[0].rent_fee}))
+		}
 		setForm((p) => ({ ...p, [name]: value }))
 	}
-	console.log(Object.keys(result));
 
 	useEffect(() => {
 		handleFetch()
 	}, [])
-	const handleAdd = () => {
-		setForm(_form)
-		console.log(form)
+
+	const addShop =  () =>{
+		if( shop_list.filter(s=>s.shop_name===form.shop_name).length<1)
+		setShopList((p)=>([...p, 
+			{shop_name:form.shop_name,
+			plaza_name:form.plaza_name,
+			rent_fee:form.rent_fee,
+			shop_id:form.shop_id}
+		]))
 	}
+
+
+	const handleSubmit = () => {
+		form.shops = shop_list
+		_postApi("tenant?query_type=add-shops", form, () => {
+			setForm(_form)
+			navigate(-1)
+		},
+			(err) => console.log(err)
+		)
+		console.log(_form)
+	}
+
 	return (
 		<div>
 			<Container className='mt-3'>
@@ -141,77 +200,144 @@ export default function TenantView() {
 								</Label>
 							</Col>
 						</Row>
+						<br />
+						<h4 style={{ borderBottom: '1px solid black' }}>Choose shop</h4>
 						<Row>
-							<Col md={3} className="mt-3">
+
+							<Col md={3}>
 								<Label>Select Plaza</Label>
-								<Input name='plaza' value={form.plaza} type='select'
-									onChange={handleChange}>
-									<option>---select---</option>
+								<Input type='select'
+									name='plaza_id'
+									value={form.plaza_id}
+									onChange={handleChange} >
+
+									<option value="">Select plaza</option>
 									{
 										plazas && plazas.map((i) =>
-											<option>{i.name}</option>
+											<option value={i.id}>{i.name}</option>
 										)
 									}
-									<option>select</option>
-								</Input>
-							</Col>
 
-							<Col md={3} className="mt-3">
-								<Label>Select Plaza Phase</Label>
-								<Input type='select' name='phase'
-									value={form.phase}
-									onChange={handleChange}>
-									<option>---select---</option>
-									{
-										plaza_phases && plaza_phases.map((i) =>
-											<option>{i.name}</option>
-										)
-									}
-									<option>select</option>
 								</Input>
 							</Col>
-							<Col md={3} className="mt-3">
+							<Col md={3}>
+								<Label>Plazas Phases</Label>
+								<Input type='select'
+									name='phase_id'
+									value={form.phase_id}
+									onChange={handleChange} >
+
+									<option value="">Select phase</option>
+									{
+										phases && phases.map((i) =>
+											<option value={i.id}>{i.name}</option>
+										)
+									}
+								</Input>
+							</Col>
+							<Col md={3}>
 								<Label>Select Shop</Label>
-								<Input name="shop_name" value={form.shop_name} type='select'
-									onChange={handleChange}>
-									<option>---select---</option>
+								<Input type='select'
+									name='shop_id'
+									value={form.shop_id}
+									onChange={handleChange} >
+									<option value="">Select shops</option>
 									{
 										shops && shops.map((i) =>
-										<option>{i.name}</option>
+											<option value={i.id}>{i.code}</option>
 										)
 									}
-									<option>select</option>
 								</Input>
 							</Col>
-							<Col md={3} className="mt-5">
-								<Button
-									color='primary'
-									onClick={handleAdd}>Assign shop</Button>
-							</Col>
+							</Row>
+							<Row>
 
+							<Col md={3}>
+								<Label>Rent start date</Label>
+								<Input type='date'
+									name='rent_start_date'
+									value={form.rent_start_date}
+									onChange={handleChange} />
+							</Col>
+							<Col md={3}>
+								<Label>Rents end date</Label>
+								<Input type='date'
+									name='rent_end_date'
+									value={form.rent_end_date}
+									onChange={handleChange} />
+							</Col>
+							<Col md={3}>
+								<Label>Deposite</Label>
+								<Input type='number'
+									name='deposite'
+									value={form.deposite}
+									onChange={handleChange} />
+							</Col>
+							</Row>
+							<Row>
+							<Col>
+							<Button
+								color='primary'
+								style={{marginTop:32}}
+								onClick={addShop}>
+									Add shop
+							</Button>
+							</Col>
 						</Row>
 					</CardBody>
-				</Card>
-			</Container>
-			<Container className='mt-5'>
-				<Card>
-					<center>
-						<CardHeader>
-							Tenant Report
-						</CardHeader>
-					</center>
 					<CardBody>
 						<Row>
-							<Table bordered>
-								<thead>
+						{shop_list.length ? <Table bordered>
+							<thead>
+								<tr>
+									<th>S/N</th>
+									<th>Plaza name</th>
+									<th>Shop name</th>
+									<th>Rent fee</th>
+								</tr>
+							</thead>
+							<tbody>
+								{shop_list.map((item,idx) =>
 									<tr>
-										<th>Select Plaza</th>
-										<th>Select Plaza Phase</th>
-										<th>Select Shop</th>
+										<td>{idx+1}</td>
+										<td>{item.plaza_name}</td>
+										<td>{item.shop_name}</td>
+										<td className='text-right'>{item.rent_fee}</td>
 									</tr>
-								</thead>
-							</Table>
+								)}
+							</tbody>
+						</Table> :
+							<h4 className='text-warning text-center'> Please add more shop</h4>}
 						</Row>
+						<center><Button
+							color='primary'
+							className='mt-3'
+							onClick={handleSubmit}>
+							Submit
+						</Button></center>
+					</CardBody>
+					<CardBody>
+					{tenant_shops.length ? <Table bordered>
+							<thead>
+								<tr>
+									<th>S/N</th>
+									<th>Plaza name</th>
+									<th>Shop name</th>
+									<th>Rent fee</th>
+								</tr>
+							</thead>
+							<tbody>
+								{tenant_shops.map((item,idx) =>
+									<tr>
+										<td>{idx+1}</td>
+										<td>{item.plaza_name}</td>
+										<td>{item.shop_name}</td>
+										<td className='text-right'>{item.rent_fee}</td>
+									</tr>
+								)}
+							</tbody>
+						</Table> :
+							<h4 className='text-warning text-center'>No shop allocated</h4>}
 					</CardBody>
 				</Card>
 			</Container>
