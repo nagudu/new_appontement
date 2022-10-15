@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react'
+import Home from '../dashboard/AdminDashboard/Home';
 import { useNavigate, useRoutes } from 'react-router-dom';
 import AddNewPlaza from '../AddNewPlaza';
+// import Dashboard from '../Dashboard';
 import Login from '../Login';
 import Managers from '../Managers';
 import ManagerUser from '../ManagerUser';
@@ -35,17 +37,24 @@ function AppNavigation() {
 
         //     ]
         // },
+       
         {
             element: <AppIndex />,
             children: [
                 {
                     path: '/',
+                    element: <Home />
+                },
+                {
+                    path: '/plaza',
                     element: <Plaza />
                 },
+                
                 {
                     path: '/shopregistratin',
                     element: <ShopRegistration />
                 },
+               
 
                 {
                     path: '/pay_rent',

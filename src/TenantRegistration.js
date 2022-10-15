@@ -85,7 +85,7 @@ export default function TenantRegistration() {
         <div>
             <Container className='mt-3'>
                 <Card>
-                    {JSON.stringify({ form })}
+                    {/* {JSON.stringify({ form })} */}
                     <center>
                         <CardHeader>
                             Tenant Registration
