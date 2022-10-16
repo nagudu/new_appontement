@@ -7,12 +7,14 @@ import {HiOutlineShoppingCart} from 'react-icons/hi'
 import {AiOutlineSetting} from 'react-icons/ai'
 import { Card, CardBody, CardHeader, Container } from 'reactstrap'
 import "./sideBar.css"
+import { MdDashboard } from 'react-icons/md'
 export default function SideBar() {
   const navigate = useNavigate()
   return (
     <div className='' style={{}}>
       <CardBody>
-        <p onClick={() => navigate("/report")} className="coups"><TbReportAnalytics size='1.5em' className='icon'/>  Report</p>
+      <p onClick={() => navigate("/")} className="coups"> <MdDashboard size='1.5em' className='icon'/>{' '}Dashboard</p>
+      <p onClick={() => navigate("/report")} className="coups"><TbReportAnalytics size='1.5em' className='icon'/>  Report</p>
         <p className='coups' onClick={() => navigate("/tenant")}><BsFillPeopleFill size='1.5em'/>  Tenants</p>
         <p className='coups' onClick={() => navigate("/managers")}><GrUserManager size='1.5em'/>  Managers</p>  
         {/* <p className='coups' onClick={() => navigate("/")}><BsShop size='1.5em'/>  Add Shop</p> */}

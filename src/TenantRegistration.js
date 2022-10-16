@@ -62,7 +62,7 @@ export default function TenantRegistration() {
 				if (resp.success) {
 					setPlazas(resp.results)
 				}else{
-					setShops([])
+					setPlazas([])
 				}
 			}
 		)
@@ -77,7 +77,7 @@ export default function TenantRegistration() {
 			(resp) => {
 				if (resp.success) {
 					setShops(resp.results)
-					console.log({ NAGUDU: resp.results })
+					// console.log({ NAGUDU: resp.results })
 				}else{
 					setShops([])
 				}

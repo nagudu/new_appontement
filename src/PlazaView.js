@@ -180,7 +180,7 @@ export default function PlazaView() {
                             <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Rent end date</Label>
-                                    <Input type="date"
+                                    <Input type="date" 
                                         name='rent_end_date'
                                         value={form.rent_end_date}
                                         onChange={handleChange} />
