@@ -10,6 +10,7 @@ export default function Agents() {
         phases: "",
         address: "",
         phases_no: "",
+        password: "",
     }
 
     const [form, setForm] = useState(_form)
@@ -50,6 +51,10 @@ export default function Agents() {
                                     <Col md={6}>
                                         <Label>Address</Label>
                                         <Input type='text' name='address' value={form.address} onChange={handleChange}/>
+                                    </Col>
+                                    <Col md={6}>
+                                        <Label>Password</Label>
+                                        <Input type='password' name='password' value={form.password} onChange={handleChange}/>
                                     </Col>
                                     <Col md={6}>
                                         <Label>Phases</Label>
