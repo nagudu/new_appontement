@@ -11,6 +11,7 @@ import BarChart from './BarChart'
 import TenantsByAccommodation from './TenantsByAccommodation'
 import { FaCalendar, FaUser } from 'react-icons/fa'
 import Marquee from "react-fast-marquee";
+
 export default function OperatorDashboard() {
   return (
     <div className='mt-4'>
@@ -128,8 +129,8 @@ export default function OperatorDashboard() {
         <Col md={3}><Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
           <TenantsByAccommodation />
         </Card></Col>
-        <Col md={3}><Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
-          <p className='d_text text-center'>Tentants by gender</p>
+        <Col md={3}><Card className=' p-3 mt-4 shadow-sm'>
+          <p className='d_text text-center'>Recent payments</p>
           <hr></hr>
           <Row>
             <Col md={2}></Col>
