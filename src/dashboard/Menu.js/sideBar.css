@@ -8,7 +8,7 @@
 
 .coups {
     cursor: pointer;
-    margin: 10px;
+    margin: 0;
     padding: 5px;
     /* width: 100%; */
 }
@@ -16,17 +16,16 @@
 .coups:hover {
     cursor: pointer;
     background-color: #2CC2D8;
-    margin: 10px;
+    margin: 0;
     padding: 5px;
     color: #ffffff;
     /* width: 100%; */
 }
 
 
-.coups:active {
+.coups-active {
     cursor: pointer;
-    background-color: #2CC2D8;
-    margin: 10px;
+    background-color: #1D89E4;
     padding: 5px;
     color: #ffffff;
     /* width: 100%; */
@@ -35,9 +34,11 @@
 .btn {
     background-color: rgb(255, 195, 84);
 }
+
 .pay {
     cursor: pointer;
 }
-.icon{
+
+.icon {
     /* color: red; */
 }

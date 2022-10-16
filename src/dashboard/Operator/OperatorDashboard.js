@@ -11,7 +11,7 @@ import BarChart from './BarChart'
 import TenantsByAccommodation from './TenantsByAccommodation'
 import { FaCalendar, FaUser } from 'react-icons/fa'
 import Marquee from "react-fast-marquee";
-export default function   OperatorDashboard() {
+export default function OperatorDashboard() {
   return (
     <div className='mt-4'>
       <Row>
@@ -29,7 +29,7 @@ export default function   OperatorDashboard() {
                 <div className='dashboard_card_details'>
                   <div>
                     <p className='d_count'>12</p>
-                    <p className='d_text'> Upcoming Rents</p>
+                    <p className='d_text'> Rent expiry alert</p>
                   </div>
                 </div>
               </Col>
@@ -99,18 +99,18 @@ export default function   OperatorDashboard() {
       <Row>
         <Col md={12}>
           <Card className='dashboard_card p-3 mt-4 shadow-sm' style={{ height: "20vh" }}>
-            <p className='d_count'>Upcoming Rents</p>
+            <p className='d_count'>Rent expiry alert</p>
 
 
             <marquee behavior="scroll" direction="up" onmouseover="stop();" onmouseout="start();" scrolldelay="200" height="200">
-              <div style={{ marginBottom:30 }} className="">
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM1</p>
+              <div style={{ marginBottom: 30 }} className="">
+                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM phase 1</p>
                 <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaUser className='not_icon' size='1em' color='grey' />{' '}Tenant: Habu Yakasai</p>
                 <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</p>
               </div>
-              <div style={{ marginBottom:30 }} className="">
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM1</p>
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaUser className='not_icon' size='1em' color='grey' />{' '}Tenant: Habu Yakasai</p>
+              <div style={{ marginBottom: 30 }} className="">
+                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}NB phase 3</p>
+                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaUser className='not_icon' size='1em' color='grey' />{' '}Tenant: Abdullahi Musa</p>
                 <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</p>
               </div>
             </marquee>
@@ -121,7 +121,7 @@ export default function   OperatorDashboard() {
       </Row>
       <Row>
         <Col md={6}>
-          <Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
+          <Card style={{ height: '30vh' }}>
             <BarChart />
           </Card>
         </Col>

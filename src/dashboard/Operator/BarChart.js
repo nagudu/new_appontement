@@ -13,44 +13,83 @@ import { Bar } from 'react-chartjs-2'
 ChartJS.register(ArcElement, Tooltip, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 export const options = {
-  responsive: true,
+  // responsive: true,
+  maintainAspectRatio: false,
   plugins: {
     legend: {
       position: 'top',
     },
     title: {
       display: true,
-      text: 'Tenants In/Out ',
+      text: '2022 Tenants payments status ',
     },
-  },
+
+    //   scales: {
+    //     yAxes: [{
+    //       ticks: {
+    //         beginAtZero: false,
+    //         min: 5,
+    //         stepSize: 3,
+    //         callback: function (value) {
+    //           return `${value}`
+    //         }
+    //       }
+    //     }],
+    //     xAxes: [{
+    //       ticks: {
+    //         beginAtZero: false,
+    //         min: 5,
+    //         stepSize: 3,
+    //         callback: function (value) {
+    //           return `${value}`
+    //         }
+    //       }
+    //     }]
+    //   }
+    scales: {
+      y:
+      {
+        min: 0,
+        max: 6,
+        stepSize: 2,
+      },
+      x:
+      {
+        min: 0,
+        max: 10,
+        stepSize: 5,
+      }
+    }
+  }
 };
 
 
 const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
   datasets: [
     {
-      label: 'Tenants In',
-      data: [1, 2, 3, 4, 5, 6, 7],
-      backgroundColor: 'rgba(34, 64, 41, 0.6)',
+      label: 'Paid',
+      data: [1, 2, 3, 4, 5, 6, 7, 4, 1, 0.5, 5, 8],
+      backgroundColor: 'rgb(44,194,216)',
     },
     {
-      label: 'Tenants Out',
-      data: [1, 2, 3, 4, 5, 6, 7],
-      backgroundColor: 'rgba(186, 207, 68, 0.6)',
+      label: 'Pending',
+      data: [1, 2, 3, 4, 5, 6, 7, 1, 3, 4, 6, 6],
+      backgroundColor: 'rgb(255, 133, 105)',
     },
   ],
   borderColor: [
-    'rgba(255, 99, 132, 1)',
-    'rgba(54, 162, 235, 1)',
+    'rgb(44,194,216)',
+    'rgb(255, 133, 105)',
   ]
 };
 
 export default function BarChart() {
   return (
     <>
-      <div style={{width:''}}>
-        <Bar options={options} data={data} />
+      <div style={{ height: '' }}>
+        <Bar width={1000}
+          height={500} options={options} data={data} />
       </div>
     </>
   )

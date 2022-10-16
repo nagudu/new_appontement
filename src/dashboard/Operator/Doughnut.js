@@ -6,14 +6,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 const data = {
   // labels: ["Male", "Female"],
   datasets: [{
-    data: [50, 50],
+    data: [27, 73],
     backgroundColor: [
-      'rgb(34, 64, 41, 0.6)',
-      'rgb(186, 207, 68, 0.6)',
+      'rgb(255, 133, 105)',
+      'rgb(44,194,216)',
     ],
     borderColor: [
-      'rgba(34, 64, 41, 0)',
-      'rgba(186, 207, 68, 0)',
+      'rgba(255, 133, 105,0.5)',
+      'rgb(44,194,216)',
     ],
     borderWidth: 1,
   }]

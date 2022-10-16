@@ -1,5 +1,5 @@
 import React from 'react'
-import { Row, Col, Card, CardHeader, CardBody } from 'reactstrap'
+import { Row, Col, Card, CardHeader, CardBody, Table } from 'reactstrap'
 import { BsClockHistory, BsClock } from 'react-icons/bs'
 import { MdMapsHomeWork } from 'react-icons/md'
 import { Circle, PieChart, Users } from 'react-feather'
@@ -28,7 +28,7 @@ export default function Home() {
                 <div className='dashboard_card_details'>
                   <div>
                     <p className='d_count'>12</p>
-                    <p className='d_text'> Upcoming Rents</p>
+                    <p className='d_text'> Rent expiry alert</p>
                   </div>
                 </div>
               </Col>
@@ -98,33 +98,42 @@ export default function Home() {
       <Row>
         <Col md={12}>
           <Card className='dashboard_card p-3 mt-4 shadow-sm' style={{ height: "20vh" }}>
-            <p className='d_count'>Upcoming Rents</p>
+            <p className='d_count'>Rent expiry alert</p>
             <marquee behavior="scroll" direction="up" onmouseover="stop();" onmouseout="start();" scrolldelay="200" height="200">
-              <div style={{ marginBottom: 30 }} className="">
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM1</p>
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaUser className='not_icon' size='1em' color='grey' />{' '}Tenant: Habu Yakasai</p>
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</p>
-              </div>
-              <div style={{ marginBottom: 30 }} className="">
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM1</p>
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaUser className='not_icon' size='1em' color='grey' />{' '}Tenant: Habu Yakasai</p>
-                <p style={{ margin: 0, marginRight: 10, display: 'inline' }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</p>
-              </div>
+              <Table border>
+                <tbody>
+                  <tr style={{ marginBottom: 30 }} className="">
+                    <td style={{ margin: 0, marginRight: 10 }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}PM </td>
+                    <td style={{ margin: 0, marginRight: 10 }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}Phase A</td>
+                    <td style={{ margin: 0, marginRight: 10 }}><FaUser className='not_icon' size='1em' color='grey' />{' '}<a href="/open"> Habu Yakasai</a></td>
+                    <td style={{ margin: 0, marginRight: 10 }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</td>
+                  </tr>
+                  <tr style={{ marginBottom: 30 }} className="">
+                    <td style={{ margin: 0, marginRight: 10 }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}BS </td>
+                    <td style={{ margin: 0, marginRight: 10 }}><MdMapsHomeWork className='not_icon' size='1em' color='grey' />{' '}Phase C </td>
+                    <td style={{ margin: 0, marginRight: 10 }}><FaUser className='not_icon' size='1em' color='grey' />{' '}<a href="/open"> Musa Isah</a></td>
+                    <td style={{ margin: 0, marginRight: 10 }}><FaCalendar className='not_icon' size='1em' color='grey' />{' '}Date: 12/12/2022</td>
+                  </tr>
+                </tbody>
+              </Table>
             </marquee>
           </Card>
         </Col>
       </Row>
       <Row>
-        <Col md={6}>
-          <Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
+        <Col md={12}>
+          <Card className='p-3 mt-4 shadow-sm'>
             <BarChart />
           </Card>
         </Col>
-        <Col md={3}><Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
+      </Row>
+      <br />
+      <Row>
+        <Col md={6}><Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
           <TenantsByAccommodation />
         </Card></Col>
-        <Col md={3}><Card className='dashboard_card ch p-3 mt-4 shadow-sm'>
-          <p className='d_text text-center'>Tentants by gender</p>
+        <Col md={6}><Card className='dp-3 mt-4 shadow-sm'>
+          <p className='d_text text-center'>Tentants by payment status</p>
           <hr></hr>
           <Row>
             <Col md={2}></Col>
@@ -137,10 +146,10 @@ export default function Home() {
           <Row className='mt-2 text-center'>
             <Col md={2}></Col>
             <Col md={4}>
-              <p className='d_text_m' style={{ color: 'white', backgroundColor: 'rgba(34, 64, 41, 0.5)', padding: 5, borderRadius: 5, fontSize: 13 }}>Male</p>
+              <p className='d_text_m' style={{ color: 'white', backgroundColor: 'rgb(44,194,216)', padding: 5, borderRadius: 5, fontSize: 13 }}>Paid</p>
             </Col>
             <Col md={5}>
-              <p className='d_text_m' style={{ color: 'white', backgroundColor: 'rgba(186, 207, 68, 0.5)', padding: 5, borderRadius: 5, fontSize: 13 }}>Female</p>
+              <p className='d_text_m' style={{ color: 'white', backgroundColor: 'rgb(255, 133, 105)', padding: 5, borderRadius: 5, fontSize: 13 }}>Pending</p>
             </Col>
             <Col md={1}></Col>
           </Row>

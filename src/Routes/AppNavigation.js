@@ -48,7 +48,7 @@ function AppNavigation() {
                     element: <Home />
                 },
                 {
-                    path: '/plaza',
+                    path: '/plazas',
                     element: <Plaza />
                 },
                 
@@ -63,7 +63,7 @@ function AppNavigation() {
                     element: <PayRent />
                 },
                 {
-                    path: '/report',
+                    path: '/reports',
                     element: <Report />
                 },
                 {
@@ -71,7 +71,7 @@ function AppNavigation() {
                     element: <Setting />
                 },
                 {
-                    path: '/tenant',
+                    path: '/tenants',
                     element: <Tenant />
                 },
                 {
@@ -91,7 +91,7 @@ function AppNavigation() {
                     element: <ManagerUser />
                 },
                 {
-                    path: '/plaza',
+                    path: '/plazas',
                     element: <Plaza />
                 },
                 {
@@ -115,7 +115,7 @@ function AppNavigation() {
                     element: <ViewPlzaPhases />
                 },
                 {
-                    path: '/agent',
+                    path: '/agents',
                     element: <Agents />
                 },
                 {
