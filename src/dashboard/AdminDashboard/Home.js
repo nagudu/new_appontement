@@ -10,12 +10,14 @@ import DoughnutChart from '../Operator/Doughnut'
 import BarChart from '../Operator/BarChart'
 import TenantsByAccommodation from '../Operator/TenantsByAccommodation'
 import { FaCalendar, FaUser } from 'react-icons/fa'
+import { useNavigate } from 'react-router-dom'
 export default function Home() {
+  const navigate =useNavigate()
   return (
     <div className='mt-4'>
       <Row>
         <Col lg={3}>
-          <Card className='dashboard_card p-3 shadow-sm'>
+          <Card className='dashboard_card p-3 shadow-sm' style={{cursor:"pointer"}} onClick={()=>navigate("/NAGUDUDDU")}>
             <Row>
               <Col md={3}>
                 <div className='dashboard_icon_div1'>
@@ -36,7 +38,7 @@ export default function Home() {
           </Card>
         </Col>
         <Col lg={3}>
-          <Card className='dashboard_card p-3 shadow-sm'>
+          <Card className='dashboard_card p-3 shadow-sm' style={{cursor:"pointer"}} onClick={()=>navigate("/NAGUDUDDU")}>
             <Row>
               <Col md={3}>
                 <div className='dashboard_icon_div2'>
@@ -57,7 +59,7 @@ export default function Home() {
           </Card>
         </Col>
         <Col lg={3}>
-          <Card className='dashboard_card p-3 shadow-sm'>
+          <Card className='dashboard_card p-3 shadow-sm' style={{cursor:"pointer"}} onClick={()=>navigate("/NAGUDUDDU")}>
             <Row>
               <Col md={3}>
                 <div className='dashboard_icon_div3'>
@@ -78,7 +80,7 @@ export default function Home() {
           </Card>
         </Col>
         <Col lg={3}>
-          <Card className='dashboard_card p-3 shadow-sm'>
+          <Card className='dashboard_card p-3 shadow-sm' style={{cursor:"pointer"}} onClick={()=>navigate("/NAGUDUDDU")}>
             <Row>
               <Col md={3}>
                 <div className='dashboard_icon_div4'>
