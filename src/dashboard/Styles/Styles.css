@@ -11,7 +11,7 @@
 .input_field {
   padding: 10px;
   border: none;
-  background-color: rgb(186, 207, 68);
+  background-color: #1D89E4;
   margin-top: 10px;
   width: 400px;
   color: rgb(34, 64, 41);
@@ -66,7 +66,7 @@
 }
 
 .right-login-div {
-  background-color: rgb(186, 207, 68);
+  background-color: #1D89E4;
   height: 100vh;
 }
 
@@ -99,7 +99,7 @@
 }
 
 .navb {
-  background-color: rgb(186, 207, 68);
+  background-color: #1D89E4;
   height: 50px;
 }
 .list {
@@ -130,7 +130,7 @@
   background-image: linear-gradient(
     to right,
     rgb(34, 64, 41),
-    rgb(186, 207, 68)
+    #1D89E4
   );
   padding: 5px 20px;
   border-radius: 20px;
@@ -138,7 +138,7 @@
 
 .action-btn:hover {
   /* width: 180px;  */
-  /* border: 1px solid rgb(186, 207, 68); */
+  /* border: 1px solid #1D89E4; */
 }
 .inputs {
   background-color: rgb(227, 227, 227);
@@ -224,7 +224,7 @@ select::-ms-expand {
 }
 /* Transition */
 .select:hover::after {
-  color: rgb(186, 207, 68);
+  color: #1D89E4;
 }
 .pm {
   background-color: rgba(128, 128, 128, 0.219);
@@ -257,7 +257,7 @@ select::-ms-expand {
   background-image: linear-gradient(
     to right,
     rgb(34, 64, 41),
-    rgb(186, 207, 68)
+    #1D89E4
   );
   padding: 2px 10px;
   border-radius: 5px;

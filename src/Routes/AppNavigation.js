@@ -20,6 +20,8 @@ import TenantRegistration from '../TenantRegistration';
 import TenantView from '../TenantView';
 import ViewPlzaPhases from '../ViewPlzaPhases';
 import AppIndex from './AppIndex';
+import Agents from '../Agent/Agents';
+import AgentsView from '../Agent/AgentsView';
 
 function AppNavigation() {
     // const dispatch = useDispatch()
@@ -111,7 +113,16 @@ function AppNavigation() {
                 {
                     path: '/view_plza_phases',
                     element: <ViewPlzaPhases />
-                },ViewPlzaPhases
+                },
+                {
+                    path: '/agent',
+                    element: <Agents />
+                },
+                {
+                    path: '/agent-view',
+                    element: <AgentsView />
+                },
+               
             ]
 
         },

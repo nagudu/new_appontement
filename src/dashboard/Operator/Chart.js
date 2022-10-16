@@ -5,7 +5,7 @@ export default function Chart() {
         <div>
             <PieChart
                 data={[
-                    { title: 'One', value: 50, color: 'rgb(186, 207, 68)' },
+                    { title: 'One', value: 50, color: '#1D89E4' },
                     { title: 'Two', value: 50, color: 'rgb(34, 64, 41)' },
                 ]}
                 lineWidth={20}

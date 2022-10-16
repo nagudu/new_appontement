@@ -20,6 +20,7 @@ export default function Sidebar() {
             <p className='coups' onClick={() => navigate("/managers")}><GrUserManager size='1.5em' />  Managers</p>
             {/* <p className='coups' onClick={() => navigate("/")}><BsShop size='1.5em'/>  Add Shop</p> */}
             <p className='coups' onClick={() => navigate("/plaza")}><BsBuilding size='1.5em' />  Plaza</p>
+            <p className='coups' onClick={() => navigate("/agent")}><BsBuilding size='1.5em' />  Agents</p>
             {/* <p className='coups' onClick={() => navigate("/setting")}><AiOutlineSetting size='1.5em'/> Settings</p>   */}
             </div>
         </>
