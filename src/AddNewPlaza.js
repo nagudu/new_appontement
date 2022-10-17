@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
 import { _postApi } from './apiCall'
 import {BsArrowLeft} from "react-icons/bs"
+import Csbtn from './Csbtn'
 
 export default function AddNewPlaza() {
     const navigate = useNavigate()
@@ -80,6 +81,7 @@ export default function AddNewPlaza() {
                             color='primary'
                                 onClick={handleAdd}>
                                 Save</Button>
+                                {/* <Csbtn  text="add" /> */}
                         </center>
                     </CardBody>
                 </Card>

@@ -3,11 +3,11 @@ import React from 'react'
 import { MdMapsHomeWork } from 'react-icons/md'
 import { MdDashboard } from 'react-icons/md'
 import { FaUsers } from 'react-icons/fa'
-import { TbReportAnalytics } from 'react-icons/tb'
+import { MdOutlinePayments } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { GrUserManager } from 'react-icons/gr'
 import { BsBuilding, BsFillPeopleFill } from 'react-icons/bs'
-import "./sideBar.css"
+import "../dashboard/Menu.js/sideBar.css"
 import { Nav, NavItem } from 'reactstrap'
 export default function Sidebar() {
     const navigate = useNavigate()
@@ -15,33 +15,33 @@ export default function Sidebar() {
 
     const routes = [
         {
-            path: '/',
+            path: '',
             title: 'Dashboard',
             icon: MdDashboard
         },
       
         {
-            path: '/reports',
-            title: 'Reports',
-            icon: TbReportAnalytics
+            path: '',
+            title: 'Payment',
+            icon: MdOutlinePayments
         },
         {
-            path: '/plazas',
-            title: 'Plazas',
-            icon: BsBuilding
+            path: '',
+            title: 'Repation',
+            icon: MdOutlinePayments
         },
         {
-            path: '/tenants',
+            path: '',
             title: 'Tenants',
             icon: BsFillPeopleFill
         },
         {
-            path: '/agents',
-            title: 'Agents',
+            path: '',
+            title: 'Phases',
             icon: BsBuilding
         },
     ]
-    return (
+    return (   
         <Nav vertical className='p-0 m-0'>
             <br />
             <br />

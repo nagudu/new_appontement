@@ -2,9 +2,9 @@ import React from 'react'
 import { Outlet } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import Navbar from '../dashboard/Menu.js/Navbar'
-import SideBar from '../dashboard/Menu.js/Sidebar'
+import SideBar from './Sidebar'
 // import '../dashboard/Styles/Styles.css'
-export default function AppIndex() {
+export default function AgentDashboard() {
     return (
         <div>
             <Row className='m-0 p-0'>
