@@ -22,6 +22,10 @@ import ViewPlzaPhases from '../ViewPlzaPhases';
 import AppIndex from './AppIndex';
 import Agents from '../Agent/Agents';
 import AgentsView from '../Agent/AgentsView';
+import RentExpiry from '../RentExpiry';
+import AgentDashboard from '../AgentDashboard/AgentDashboard';
+import AgentShops from '../AgentDashboard/AgentShops';
+
 
 function AppNavigation() {
     // const dispatch = useDispatch()
@@ -31,15 +35,7 @@ function AppNavigation() {
     //     }, [])
 
     let element = useRoutes([
-        // {
-        //     path: '/',
-        //     element: <Login />,
-        //     children: [{ index: true },
 
-
-        //     ]
-        // },
-       
         {
             element: <AppIndex />,
             children: [
@@ -47,16 +43,18 @@ function AppNavigation() {
                     path: '/',
                     element: <Home />
                 },
+
+
                 {
                     path: '/plazas',
                     element: <Plaza />
                 },
-                
+
                 {
                     path: '/shopregistratin',
                     element: <ShopRegistration />
                 },
-               
+
 
                 {
                     path: '/pay_rent',
@@ -122,7 +120,23 @@ function AppNavigation() {
                     path: '/agent-view',
                     element: <AgentsView />
                 },
-               
+                {
+                    path: '/rent-expiry',
+                    element: <RentExpiry />
+                },
+
+            ]
+
+        },
+        {
+            path: '/agent-dashboard',
+            element: <AgentDashboard />,
+            children: [
+                { index: true, element: <AgentShops /> },
+                {
+                    // path: "/",
+                    // element: </>
+                }
             ]
 
         },

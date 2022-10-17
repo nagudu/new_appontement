@@ -19,6 +19,7 @@ export default function Sidebar() {
             title: 'Dashboard',
             icon: MdDashboard
         },
+      
         {
             path: '/reports',
             title: 'Reports',

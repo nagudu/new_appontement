@@ -40,7 +40,7 @@ export default function Navbar() {
               <FaBell size='1.6em' style={{ color: 'rgb(34, 64, 41)', zIndex: 1 }} />
             </div>
             <div className='bell_user_icon_div' onClick={() => { location.pathname.includes('operator') ? navigate('/operator/profile') : navigate('admin/profile') }}>
-              <p className='username'>Habu Yakasai{' '}<img src={user} className='userimage' alt='' /></p>
+              <p className='username' style={{color: "white"}}>Habu Yakasai{' '}<img src={user} className='userimage' alt='' /></p>
             </div>
           </div>
         </Col>
