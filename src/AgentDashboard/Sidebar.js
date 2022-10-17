@@ -41,7 +41,7 @@ export default function Sidebar() {
             icon: BsBuilding
         },
     ]
-    return (
+    return (   
         <Nav vertical className='p-0 m-0'>
             <br />
             <br />
