@@ -88,6 +88,15 @@ export default function AgentShops() {
                                             <th>Reint End Date</th>
                                         </tr>
                                     </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                        </tr>
+                                    </tbody>
                             </Table>
                         </CardBody>
                     </Container>
