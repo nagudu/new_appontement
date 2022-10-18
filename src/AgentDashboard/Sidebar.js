@@ -15,28 +15,28 @@ export default function Sidebar() {
 
     const routes = [
         {
-            path: '',
+            path: '/agent-dashboard',
             title: 'Dashboard',
             icon: MdDashboard
         },
       
         {
-            path: '',
+            path: '/agent-dashboard/payment',
             title: 'Payment',
             icon: MdOutlinePayments
         },
         {
-            path: '',
+            path: '/agent-dashboard/repetion',
             title: 'Repation',
             icon: MdOutlinePayments
         },
         {
-            path: '',
+            path: '/agent-dashboard/tenant',
             title: 'Tenants',
             icon: BsFillPeopleFill
         },
         {
-            path: '',
+            path: '/agent-dashboard/phases',
             title: 'Phases',
             icon: BsBuilding
         },

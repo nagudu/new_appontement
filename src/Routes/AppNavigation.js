@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import Home from '../dashboard/AdminDashboard/Home';
 import { useNavigate, useRoutes } from 'react-router-dom';
 import AddNewPlaza from '../AddNewPlaza';
-// import Dashboard from '../Dashboard';
 import Login from '../Login';
 import Managers from '../Managers';
 import ManagerUser from '../ManagerUser';
@@ -14,7 +13,6 @@ import PlazaView from '../PlazaView';
 import Report from '../Report';
 import Setting from '../Setting';
 import ShopRegistration from '../ShopRegistration';
-import ShopsList from '../ShopsList';
 import Tenant from '../Tenant';
 import TenantRegistration from '../TenantRegistration';
 import TenantView from '../TenantView';
@@ -25,6 +23,11 @@ import AgentsView from '../Agent/AgentsView';
 import RentExpiry from '../RentExpiry';
 import AgentDashboard from '../AgentDashboard/AgentDashboard';
 import AgentShops from '../AgentDashboard/AgentShops';
+import Payment from '../AgentDashboard/Payment';
+import AgentRepetion from '../AgentDashboard/AgentRepetion';
+import AgentPayment from '../AgentDashboard/AgentPayment';
+import AgentTenant from '../AgentDashboard/AgentTenant';
+import AgentPhases from '../AgentDashboard/AgentPhases';
 
 
 function AppNavigation() {
@@ -125,18 +128,34 @@ function AppNavigation() {
                     element: <RentExpiry />
                 },
 
+
             ]
 
         },
+
         {
             path: '/agent-dashboard',
             element: <AgentDashboard />,
             children: [
-                { index: true, element: <AgentShops /> },
                 {
-                    // path: "/",
-                    // element: </>
-                }
+                    index: true, element: <AgentShops />
+                },
+                {
+                    path: '/agent-dashboard/repetion',
+                    element: <AgentRepetion />
+                },
+                {
+                    path: '/agent-dashboard/payment',
+                    element: <AgentPayment />
+                },
+                {
+                    path: '/agent-dashboard/tenant',
+                    element: <AgentTenant />
+                },
+                {
+                    path: '/agent-dashboard/phases',
+                    element: <AgentPhases />
+                },
             ]
 
         },

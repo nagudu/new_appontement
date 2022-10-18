@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table, Tag } from 'reactstrap'
+import { Button, Card, CardBody, CardHeader, Col, Container, Input, Table, } from 'reactstrap'
 import _fetchApi from './api'
-import {AiOutlinePlusCircle, AiOutlineSearch} from 'react-icons/ai'
+import {AiOutlinePlusCircle} from 'react-icons/ai'
 
 export default function ShopsList() {
     const navigate = useNavigate()

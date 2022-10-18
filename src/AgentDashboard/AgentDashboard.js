@@ -3,7 +3,6 @@ import { Outlet } from 'react-router-dom'
 import { Row, Col } from 'reactstrap'
 import Navbar from '../dashboard/Menu.js/Navbar'
 import SideBar from './Sidebar'
-// import '../dashboard/Styles/Styles.css'
 export default function AgentDashboard() {
     return (
         <div>

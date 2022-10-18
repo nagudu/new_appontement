@@ -11,7 +11,6 @@ export default function PlazaPhases() {
         no_of_shops: ""
     }
     const [form, setForm] = useState(_form)
-    const [date, setData] = useState([])
 
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }));
