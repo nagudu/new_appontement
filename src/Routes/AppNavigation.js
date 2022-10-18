@@ -23,7 +23,7 @@ import AgentsView from '../Agent/AgentsView';
 import RentExpiry from '../RentExpiry';
 import AgentDashboard from '../AgentDashboard/AgentDashboard';
 import AgentShops from '../AgentDashboard/AgentShops';
-import Payment from '../AgentDashboard/Payment';
+// import Payment from '../AgentDashboard/Payment';
 import AgentRepetion from '../AgentDashboard/AgentRepetion';
 import AgentPayment from '../AgentDashboard/AgentPayment';
 import AgentTenant from '../AgentDashboard/AgentTenant';

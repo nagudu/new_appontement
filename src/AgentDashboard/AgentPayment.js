@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
+import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 
 export default function AgentPayment() {
     const navigate = useNavigate()
@@ -14,6 +15,7 @@ export default function AgentPayment() {
         discription: "",
     }
     const [form, setForm] = useState(_form)
+    const [showPaymentForm, setShowPaymentForm] = useState(false)
 
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }))
@@ -27,25 +29,27 @@ export default function AgentPayment() {
             <Container className='mt-3'>
                 <Card>
                     <CardHeader>
-                    <Row>
-                        <Col md={4}><Button
-                        onClick={() => navigate(-1)}
-                        color='primary'
-                        >
-                             <BsArrowLeft size='1.5em'/>
-                                  {' '}
-                           
-                            Back</Button></Col>
-                        <Col md={4}>Payment</Col>
-                    </Row>
+                        <Row>
+                            <Col md={4}><Button
+                                onClick={() => navigate(-1)}
+                                color='primary'
+                            >
+                                <BsArrowLeft size='1.5em' />
+                                {' '}
+
+                                Back</Button></Col>
+                            <Col md={4}>Payment</Col>
+                            <Col md={3} style={{float:'right'}}><Button color='primary' onClick={() => setShowPaymentForm(!showPaymentForm)}><AiOutlinePlusCircle size='1.5em'/>
+                           {" "}Add New Agent</Button></Col>
+                        </Row>
                     </CardHeader>
                     <CardBody>
-                        <Row>
+                        {showPaymentForm ? <Row>
                             <Col md={12}>
-                                <Input type='search' 
-                                name='search' value={form.search}
-                                placeholder='Search...'
-                                onChange={handleChange}
+                                <Input type='search'
+                                    name='search' value={form.search}
+                                    placeholder='Search...'
+                                    onChange={handleChange}
                                 />
                             </Col>
                             <Col md={6}>
@@ -87,10 +91,39 @@ export default function AgentPayment() {
                                     value={form.discription}
                                     onChange={handleChange} />
                             </Col>
-                        </Row>
+                        </Row> : <>
+
+                            <Table bordered>
+                               
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Address</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        <tr>
+                                            <td>ishaq</td>
+                                            <td>musa</td>
+                                            <td>idi</td>
+                                            <td>halifa</td>
+                                        </tr>
+                                        <tr>
+                                            <td>ishaq</td>
+                                            <td>musa</td>
+                                            <td>idi</td>
+                                            <td>halifa</td>
+                                        </tr>
+                                    </tbody>
+                               
+                            </Table>
+                        </>}
                         <center>
                             <Button
-                            color='primary'
+                                color='primary'
                                 className='mt-3'
                                 onClick={handleAdd}>
                                 Save
