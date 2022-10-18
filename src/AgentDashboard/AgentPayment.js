@@ -106,13 +106,13 @@ export default function AgentPayment() {
 
                                     <tbody>
                                         <tr>
-                                            <td>ishaq</td>
-                                            <td>musa</td>
+                                            <td >1</td>
+                                            <td style={{cursor: "pointer"}}  onClick={() => setShowPaymentForm(!showPaymentForm)}>musa</td>
                                             <td>idi</td>
                                             <td>halifa</td>
                                         </tr>
                                         <tr>
-                                            <td>ishaq</td>
+                                            <td>2</td>
                                             <td>musa</td>
                                             <td>idi</td>
                                             <td>halifa</td>
