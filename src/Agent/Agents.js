@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 
@@ -30,9 +32,11 @@ export default function Agents() {
                 <Card>
                     <CardHeader>
                         <Row>
-                            <Col md={3}><Button onClick={() => navigate(-1)}>Back</Button>{" "}
+                            <Col md={3}><Button onClick={() => navigate(-1)} color="primary"><BsArrowLeft size='1.5em'/>
+                                  {' '}Back</Button>{" "}
                             </Col><Col className='text-center'>{createAgent?'Add New Agent': "Agents"}</Col>
-                            <Col md={3} style={{float:'right'}}><Button onClick={() => setCreateAgent(!createAgent)}>Add New Agent</Button></Col>
+                            <Col md={3} style={{float:'right'}}><Button color='primary' onClick={() => setCreateAgent(!createAgent)}><AiOutlinePlusCircle size='1.5em'/>
+                           {" "}Add New Agent</Button></Col>
                         </Row>
                     </CardHeader>
 

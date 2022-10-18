@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Home from '../dashboard/AdminDashboard/Home';
 import { useNavigate, useRoutes } from 'react-router-dom';
 import AddNewPlaza from '../AddNewPlaza';
-import Login from '../Login';
+// import Login from '../Login';
 import Managers from '../Managers';
 import ManagerUser from '../ManagerUser';
 import ManagerView from '../ManagerView';

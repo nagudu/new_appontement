@@ -1,11 +1,11 @@
 import React from 'react'
 // import { ImHome, ImUser } from 'react-icons/im'
-import { MdMapsHomeWork } from 'react-icons/md'
+// import { MdMapsHomeWork } from 'react-icons/md'
 import { MdDashboard } from 'react-icons/md'
 import { FaUsers } from 'react-icons/fa'
 import { MdOutlinePayments } from 'react-icons/md'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { GrUserManager } from 'react-icons/gr'
+// import { GrUserManager } from 'react-icons/gr'
 import { BsBuilding, BsFillPeopleFill } from 'react-icons/bs'
 import "../dashboard/Menu.js/sideBar.css"
 import { Nav, NavItem } from 'reactstrap'
@@ -15,7 +15,7 @@ export default function Sidebar() {
 
     const routes = [
         {
-            path: '/agent-dashboard',
+            path: '/agent-dashboard', 
             title: 'Dashboard',
             icon: MdDashboard
         },

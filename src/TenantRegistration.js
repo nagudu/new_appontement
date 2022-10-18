@@ -10,7 +10,7 @@ import moment from 'moment'
 export default function TenantRegistration() {
 	const navigate = useNavigate()
 	const today = moment().format('YYYY-MM-DD')
-	const due_date = moment(today).add('months',12).format('YYYY-MM-DD')
+	const due_date = moment(today).add('months', 12).format('YYYY-MM-DD')
 	const _form = {
 		name: "",
 		phone_no: "",
@@ -20,12 +20,12 @@ export default function TenantRegistration() {
 		plaza_id: "",
 		phase_id: "",
 		shop_id: "",
-		plaza_name:"",
-		shop_name:"",
-		rent_start_date:today,
-		rent_end_date:due_date,
-		deposite:null,
-		shops:[]
+		plaza_name: "",
+		shop_name: "",
+		rent_start_date: today,
+		rent_end_date: due_date,
+		deposite: null,
+		shops: []
 	}
 	const [form, setForm] = useState(_form)
 	const [shop_list, setShopList] = useState([])
@@ -34,14 +34,14 @@ export default function TenantRegistration() {
 	const [plazas, setPlazas] = useState([])
 
 	const handleChange = ({ target: { name, value } }) => {
-		if(name==='plaza_id'){
-			let selected_plaza = plazas.filter(p=>p.id==value)
-			console.error({selected_plaza});
-			setForm((p)=>({...p, plaza_name: selected_plaza.length? selected_plaza[0].name:""}))
-		}else if(name==='shop_id'){
-			let selected_shop = shops.filter(p=>p.id==value)
-			console.error({selected_shop});
-			setForm((p)=>({...p, shop_name: selected_shop.length? selected_shop[0].code:"", rent_fee:selected_shop[0].rent_fee}))
+		if (name === 'plaza_id') {
+			let selected_plaza = plazas.filter(p => p.id == value)
+			console.error({ selected_plaza });
+			setForm((p) => ({ ...p, plaza_name: selected_plaza.length ? selected_plaza[0].name : "" }))
+		} else if (name === 'shop_id') {
+			let selected_shop = shops.filter(p => p.id == value)
+			console.error({ selected_shop });
+			setForm((p) => ({ ...p, shop_name: selected_shop.length ? selected_shop[0].code : "", rent_fee: selected_shop[0].rent_fee }))
 		}
 		setForm((p) => ({ ...p, [name]: value }))
 	}
@@ -61,7 +61,7 @@ export default function TenantRegistration() {
 			(resp) => {
 				if (resp.success) {
 					setPlazas(resp.results)
-				}else{
+				} else {
 					setPlazas([])
 				}
 			}
@@ -78,7 +78,7 @@ export default function TenantRegistration() {
 				if (resp.success) {
 					setShops(resp.results)
 					// console.log({ NAGUDU: resp.results })
-				}else{
+				} else {
 					setShops([])
 				}
 			}
@@ -93,7 +93,7 @@ export default function TenantRegistration() {
 			(resp) => {
 				if (resp.success) {
 					setPhases(resp.results)
-				}else{
+				} else {
 					setPhases([])
 				}
 			})
@@ -104,14 +104,16 @@ export default function TenantRegistration() {
 		fetchPhases()
 	}, [fetchPhases])
 
-	const addShop = () =>{
-		if( shop_list.filter(s=>s.shop_name===form.shop_name).length<1)
-		setShopList((p)=>([...p, 
-			{shop_name:form.shop_name,
-			plaza_name:form.plaza_name,
-			rent_fee:form.rent_fee,
-			shop_id:form.shop_id}
-		]))
+	const addShop = () => {
+		if (shop_list.filter(s => s.shop_name === form.shop_name).length < 1)
+			setShopList((p) => ([...p,
+			{
+				shop_name: form.shop_name,
+				plaza_name: form.plaza_name,
+				rent_fee: form.rent_fee,
+				shop_id: form.shop_id
+			}
+			]))
 	}
 
 	return (
@@ -120,19 +122,29 @@ export default function TenantRegistration() {
 				<Card>
 					{/* {JSON.stringify({ form, shop_list })} */}
 					<center>
-						<CardHeader>
-							Tenant Registration
-						</CardHeader>
+					<CardHeader >
+                    <Row>
+                        <Col md={4}><Button
+                        onClick={() => navigate(-1)}
+                        color='primary'
+                        >
+                             <BsArrowLeft size='1.5em'/>
+                                  {' '}
+                           
+                            Back</Button></Col>
+                        <Col md={4}>Tenant Registration</Col>
+                    </Row>
+                    </CardHeader>
 					</center>
 					<CardBody>
-						<Button
+						{/* <Button
 							onClick={() => navigate("/tenant")}
 							color='primary'
 						>
 							<BsArrowLeft size='1.5em' />
 							{' '}
 
-							Back</Button>
+							Back</Button> */}
 						<Row className='mt-3'>
 							<Col md={3}>
 								<Label>Name</Label>
@@ -246,7 +258,7 @@ export default function TenantRegistration() {
 								color='primary'
 								className='mt-3'
 								onClick={addShop}>
-									Add shop
+								Add shop
 							</Button>
 						</center>
 					</CardBody>
@@ -261,9 +273,9 @@ export default function TenantRegistration() {
 								</tr>
 							</thead>
 							<tbody>
-								{shop_list.map((item,idx) =>
+								{shop_list.map((item, idx) =>
 									<tr>
-										<td>{idx+1}</td>
+										<td>{idx + 1}</td>
 										<td>{item.plaza_name}</td>
 										<td>{item.shop_name}</td>
 										<td className='text-right'>{item.rent_fee}</td>
