@@ -51,11 +51,18 @@ export default function Agents() {
 		setForm(_form)
 		setLoading(true)
 		agentList.forEach(data => {
-			createUser({ data: { ...data, files: [data.picture] } }, () => { alert('User created') }, () => { alert('Failed to create User') })
+			createUser({
+				data: {
+					...data
+					, files: [data.picture.split(';base64,').pop()]
+				}
+			}, () => {
+				alert('User created')
+			}, () => { alert('Failed to create User') })
 		})
 
 		setCreateAgent(!createAgent)
-
+		// base64String.split(';base64,').pop()
 	}
 	function handleImage(e) {
 		// console.error(e.target.files[0]);
@@ -98,6 +105,9 @@ export default function Agents() {
 					</CardHeader>
 					{createAgent ?
 						<CardBody>
+							{form.picture ? <Row><Col className='text-center avatar' md={12}>
+								<img width={100} height={100} src={form.picture} />
+							</Col></Row> : null}
 							<Row>
 								<Col md={6}>
 									<Label>Name</Label>
@@ -121,18 +131,18 @@ export default function Agents() {
 										{phases.map(p => <option key={p.id} value={p.id}>{p.name}</option>)}
 									</Input>
 								</Col>
-								<Col md={6}>
+								{/* <Col md={6}>
 									<Label>Phases No</Label>
 									<Input type='number' name='phases_no' value={form.phases_no} onChange={handleChange} />
-								</Col>
+								</Col> */}
 								<Col md={6}>
 									<Label>Picture</Label>
 									<Input type='file' name='picture' onChange={handleImage} />
-								</Col>
-
-								<Col md={6} className=' pt-3 text+-right'>
+									<br />
 									<Button className='mt-3' block color='primary' onClick={handleAdd}>Add agent</Button>
 								</Col>
+
+
 							</Row>
 						</CardBody> : null}
 					<CardBody>
