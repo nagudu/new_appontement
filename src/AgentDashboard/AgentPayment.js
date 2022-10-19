@@ -1,8 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
+import _fetchApi from '../api'
+import { _postApi } from '../apiCall'
 
 export default function AgentPayment() {
     const navigate = useNavigate()
@@ -16,14 +18,38 @@ export default function AgentPayment() {
     }
     const [form, setForm] = useState(_form)
     const [showPaymentForm, setShowPaymentForm] = useState(false)
+    const [result, setResult] = useState([])
+
 
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }))
     }
     const handleAdd = () => {
-        setForm(_form)
-        console.log(form)
+        // form.shops = shop_list
+        _postApi("shop_allocation", form, () => {
+            setForm(_form)
+            navigate(-1)
+        },
+            (err) => console.log(err)
+        )
+        console.log(_form)
     }
+    const handleFetch = () => {
+        _fetchApi(
+            `http://localhost:34567/getTenantList`,
+            (data) => {
+                if (data.success) {
+                }
+                console.log(data.results)
+                setResult(data.results)
+            }
+        )
+
+
+    }
+    useEffect(() => {
+        handleFetch()
+    }, [0])
     return (
         <div>
             <Container className='mt-3'>
@@ -39,8 +65,8 @@ export default function AgentPayment() {
 
                                 Back</Button></Col>
                             <Col md={4}>Payment</Col>
-                            <Col md={3} style={{float:'right'}}><Button color='primary' onClick={() => setShowPaymentForm(!showPaymentForm)}><AiOutlinePlusCircle size='1.5em'/>
-                           {" "}Add New Agent</Button></Col>
+                            <Col md={3} style={{ float: 'right' }}><Button color='primary' onClick={() => setShowPaymentForm(!showPaymentForm)}><AiOutlinePlusCircle size='1.5em' />
+                                {" "}Add New Agent</Button></Col>
                         </Row>
                     </CardHeader>
                     <CardBody>
@@ -94,31 +120,27 @@ export default function AgentPayment() {
                         </Row> : <>
 
                             <Table bordered>
-                               
-                                    <thead>
-                                        <tr>
-                                            <th>S/N</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Address</th>
-                                        </tr>
-                                    </thead>
 
-                                    <tbody>
-                                        <tr>
-                                            <td >1</td>
-                                            <td style={{cursor: "pointer"}}  onClick={() => setShowPaymentForm(!showPaymentForm)}>musa</td>
-                                            <td>idi</td>
-                                            <td>halifa</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2</td>
-                                            <td>musa</td>
-                                            <td>idi</td>
-                                            <td>halifa</td>
-                                        </tr>
-                                    </tbody>
-                               
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Name</th>
+                                        <th>Email</th>
+                                        <th>Address</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {/* {result.map((item,index) =>
+                                    <tr>
+                                        <td >{item}</td>
+                                        <td style={{ cursor: "pointer" }} onClick={() => setShowPaymentForm(!showPaymentForm)}>{item.name}</td>
+                                        <td>{item.email}</td>
+                                        <td>{item.address}</td>
+                                    </tr>
+                                  )} */}
+                                </tbody>
+
                             </Table>
                         </>}
                         <center>
