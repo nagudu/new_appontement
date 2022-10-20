@@ -1,11 +1,7 @@
 import React from 'react'
-// import { ImHome, ImUser } from 'react-icons/im'
-import { MdMapsHomeWork } from 'react-icons/md'
 import { MdDashboard } from 'react-icons/md'
-import { FaUsers } from 'react-icons/fa'
 import { TbReportAnalytics } from 'react-icons/tb'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { GrUserManager } from 'react-icons/gr'
 import { BsBuilding, BsFillPeopleFill } from 'react-icons/bs'
 import "./sideBar.css"
 import { Nav, NavItem } from 'reactstrap'

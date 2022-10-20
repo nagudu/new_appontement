@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
 import { _postApi } from './apiCall'
-import {BsArrowLeft} from "react-icons/bs"
+import { BsArrowLeft } from "react-icons/bs"
 import Csbtn from './Csbtn'
 
 export default function AddNewPlaza() {
@@ -21,7 +21,7 @@ export default function AddNewPlaza() {
         setForm((p) => ({ ...p, [name]: value }))
     }
     const handleAdd = () => {
-        _postApi("plaza", form, () => {
+        _postApi("plazas", form, () => {
             setForm(_form)
             navigate(-1)
         },
@@ -39,13 +39,13 @@ export default function AddNewPlaza() {
                         </CardHeader>
                     </center>
                     <CardBody>
-                    <Button
-                        onClick={() => navigate("/plaza")}
-                        color='primary'
+                        <Button
+                            onClick={() => navigate("/plaza")}
+                            color='primary'
                         >
-                             <BsArrowLeft size='1.5em'/>
-                                  {' '}
-                           
+                            <BsArrowLeft size='1.5em' />
+                            {' '}
+
                             Back</Button>
 
                         <Row>
@@ -61,7 +61,7 @@ export default function AddNewPlaza() {
                                     value={form.address}
                                     onChange={handleChange} />
                             </Col>
-                          
+
                             <Col md={6}>
                                 <Label>Code</Label>
                                 <Input type='text'
@@ -69,7 +69,7 @@ export default function AddNewPlaza() {
                                     value={form.code}
                                     onChange={handleChange} />
                             </Col>
-                              <Col md={6}>
+                            <Col md={6}>
                                 <Label>No Of Shop</Label>
                                 <Input type='number' name='no_of_shop'
                                     value={form.no_of_shop}
@@ -78,10 +78,10 @@ export default function AddNewPlaza() {
                         </Row>
                         <center>
                             <Button className='mt-3'
-                            color='primary'
+                                color='primary'
                                 onClick={handleAdd}>
                                 Save</Button>
-                                {/* <Csbtn  text="add" /> */}
+                            {/* <Csbtn  text="add" /> */}
                         </center>
                     </CardBody>
                 </Card>

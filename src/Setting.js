@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react'
-import { Button, Card, CardBody, Col, Container, Dropdown, DropdownItem, DropdownMenu, DropdownToggle, Input, Label, Nav, NavItem, NavLink, Row, Table } from 'reactstrap'
+import { Button, Card, CardBody, Col, Container, Input, Label, Nav, NavItem, NavLink, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 import { _postApi } from './apiCall'
 
@@ -13,7 +13,7 @@ export default function Setting() {
     }
 
     const [form, setForm] = useState(_form)
-    const [data, setData] = useState([])
+    // const [data, setData] = useState([])
     const [result, setResult] = useState([])
 
     const handleChange = ({ target: { name, value }}) => {

@@ -1,12 +1,12 @@
-// import { setSelectionRange } from '@testing-library/user-event/dist/utils'
 import React, { useCallback, useEffect, useState } from 'react'
-// import { FaCalendar, FaUser } from 'react-icons/fa'
 import { MdEdit } from 'react-icons/md'
-// import { useDispatch } from 'react-redux'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { BsArrowLeft } from 'react-icons/bs'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from '../api'
 import { createUser } from '../redux/actions/authActions'
+import SearchBar from '../components/UI/SearchBar';
 
 export default function Agents() {
 	const _form = {
@@ -15,6 +15,7 @@ export default function Agents() {
 		picture: "",
 		phases: "",
 		address: "",
+		phone_no: "",
 		phases_no: "",
 		phase_ids: [],
 		password: "",
@@ -28,12 +29,14 @@ export default function Agents() {
 	const [phases, setPhases] = useState([])
 	const [createAgent, setCreateAgent] = useState(false)
 	const [loading, setLoading] = useState(false)
-
+	const [filterText, setFilterText] = useState('');
+	const [agents, setAgents] = useState([])
 	const handleChange = ({ target: { name, value, options, selectedOptions } }) => {
 		let valuex =
 			selectedOptions && Array.from(selectedOptions, (option) => option.value);
 		let more_value = valuex && valuex.length ? valuex.join(",") : null;
 		console.error({ name, value, options, selectedOptions, more_value });
+
 
 		if (selectedOptions && selectedOptions.length) {
 			setForm((p) => ({ ...p, phase_ids: [more_value ? more_value : value] }))
@@ -50,7 +53,7 @@ export default function Agents() {
 	const handleSubmit = () => {
 		setForm(_form)
 		setLoading(true)
-		agentList.forEach(data => {
+		agentList.forEach((data, idx) => {
 			createUser({
 				data: {
 					...data
@@ -58,6 +61,9 @@ export default function Agents() {
 				}
 			}, () => {
 				alert('User created')
+				if (idx === (agentList.length - 1)) {
+					setAgentList([])
+				}
 			}, () => { alert('Failed to create User') })
 		})
 
@@ -91,18 +97,41 @@ export default function Agents() {
 		fetchPlazaPhases()
 	}, [0])
 
+	const onFilterTextChange = (e) => {
+		setFilterText(e)
+	}
+
+	const handleFetch = useCallback(() => {
+		_fetchApi(
+			`http://localhost:34567/agents?query_type=select-all`,
+			(data) => {
+				if (data.success) {
+					setAgents(data.results)
+					console.log(data.results)
+				}
+			}
+		)
+	}, [])
+	useEffect(() => {
+		handleFetch()
+	}, [0])
+
 	return (
 		<div>
 			<Container className='mt-3'>
-				{/* {JSON.stringify({ agentList })} */}
 				<Card>
 					<CardHeader>
 						<Row>
-							<Col md={3}><Button onClick={() => navigate(-1)}>Back</Button>{" "}
+							<Col md={3}><Button onClick={() => navigate(-1)} color="primary"><BsArrowLeft size='1.5em' />
+								{' '}Back</Button>{" "}
 							</Col><Col className='text-center'>{createAgent ? 'Add New Agent' : "Agents"}</Col>
-							<Col md={3} style={{ float: 'right' }}><Button onClick={() => setCreateAgent(!createAgent)}>Add New Agent</Button></Col>
+							<Col md={3} style={{ float: 'right' }}><Button color='primary' onClick={() => setCreateAgent(!createAgent)}><AiOutlinePlusCircle size='1.5em' />
+								{" "}Add New Agent</Button></Col>
 						</Row>
 					</CardHeader>
+					<CardBody>
+						<SearchBar onFilterTextChange={onFilterTextChange} filterText={filterText} />
+					</CardBody>
 					{createAgent ?
 						<CardBody>
 							{form.picture ? <Row><Col className='text-center avatar' md={12}>
@@ -121,7 +150,11 @@ export default function Agents() {
 									<Label>Address</Label>
 									<Input type='text' name='address' value={form.address} onChange={handleChange} />
 								</Col>
-								<Col md={6}>
+								<Col md={3}>
+									<Label>Phone no:</Label>
+									<Input type='phone_no' name='phone_no' value={form.phone_no} onChange={handleChange} />
+								</Col>
+								<Col md={3}>
 									<Label>Password</Label>
 									<Input type='password' name='password' value={form.password} onChange={handleChange} />
 								</Col>
@@ -144,7 +177,30 @@ export default function Agents() {
 
 
 							</Row>
-						</CardBody> : null}
+						</CardBody> : <>
+							<CardBody>
+								<Table>
+									<thead>
+										<tr>
+											<th>SN</th>
+											<th>AGENTS</th>
+											<th>NO. PHASES</th>
+											<th>REVENUE</th>
+											<th>BALANCE</th>
+										</tr>
+									</thead>
+									<tbody>
+										{agents.map((ag, idx) => (<tr>
+											<td>{idx + 1}</td>
+											<td>{ag.name}</td>
+											<td>{ag.no_of_phase}</td>
+											<td>{ag.revenue}</td>
+											<td>{ag.balance}</td>
+										</tr>))}
+									</tbody>
+								</Table>
+							</CardBody>
+						</>}
 					<CardBody>
 						<Row className='mt-3'>
 							<Table bordered>
@@ -153,7 +209,7 @@ export default function Agents() {
 										<tr>
 											<th>S/N</th>
 											<th>Name</th>
-											<th>Plazas</th>
+											<th>Assigned phases</th>
 											<th>Picture</th>
 											<th style={{ width: 100 }}>Action</th>
 										</tr>
@@ -168,7 +224,7 @@ export default function Agents() {
 										</tr>
 									</tbody>))}
 								</>
-									: <tbody><tr><td colSpan={4}>N/A</td></tr></tbody>}
+									: null}
 							</Table>
 						</Row>
 						{agentList.length ? <Row>

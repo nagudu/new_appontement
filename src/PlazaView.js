@@ -1,4 +1,4 @@
-import { isCursorAtEnd } from '@testing-library/user-event/dist/utils'
+// import { isCursorAtEnd } from '@testing-library/user-event/dist/utils'
 import React, { useCallback, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Input, Label, Row, Table } from 'reactstrap'
@@ -9,14 +9,16 @@ import { _postApi } from './apiCall'
 
 export default function PlazaView() {
 
+    const [plaza, setPlaza] = useState([])
+    const [phases, setPhases] = useState([])
     const query = useQuery()
     const plaza_id = query.get('id')
     const _form = {
-        code: '',
+        code: plaza.code,
         name: '',
         no_of_shops: '',
         plaza_id,
-        rent_fee: 0,
+        rent_fee: null,
         rent_start_date: null,
         rent_end_date: null
     }
@@ -25,14 +27,12 @@ export default function PlazaView() {
     const [viewPhase, setViewPhase] = useState(false)
     // const [result, setResult] = useState([])
     //get-plaza-phase-list
-    const [data, setData] = useState([])
-    const [phases, setPhases] = useState([])
     const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }));
     }
     const handleSubmit = () => {
         // console.log(form);
-        _postApi("plaza_phases", form, (resp) => {
+        _postApi("plaza_phases?query_type=create", form, (resp) => {
             if (resp.success) {
                 setForm(_form)
                 fetchPlazaPhases()
@@ -54,14 +54,13 @@ export default function PlazaView() {
     const fetchPlazaPhases = useCallback(() => {
         _fetchApi(
             `http://localhost:34567/getPlaza?id=${plaza_id}`,
-            (data) => {
-                if (data.success) {
-                    setData(data.results[0])
+            (plaza) => {
+                if (plaza.success) {
+                    setPlaza(plaza.results[0])
+                    setForm((p) => ({ ...p, code: plaza.results[0].code }))
                 }
-                setData(data.results[0])
-            }
-        )
-    }, [0])
+            })
+    }, [plaza_id])
 
     useEffect(() => {
         fetchPlazaPhases()
@@ -70,9 +69,9 @@ export default function PlazaView() {
     const handleFetch = () => {
         _fetchApi(
             `http://localhost:34567/get-plaza-phase-list`,
-            (data) => {
-                if (data.success) {
-                    setPhases(data.results)
+            (plaza) => {
+                if (plaza.success) {
+                    setPhases(plaza.results)
                 }
             }
         )
@@ -111,25 +110,20 @@ export default function PlazaView() {
                         {!viewPhase ? <Row className='mt-3'>
                             <Col md={4}>
                                 <Label><b>Name:  </b>
-                                    {data.name}
+                                    {plaza.name}
                                 </Label>
                             </Col>
                             <Col md={4}>
                                 <Label>
                                     <b>Address:  </b>
-                                    {data.address}
+                                    {plaza.address}
                                 </Label>
                             </Col>
-                            <Col md={4}>
-                                <Label>
-                                    <b>Code:  </b>
-                                    {data.code}
-                                </Label>
-                            </Col>
+
                             <Col md={4}>
                                 <Label>
                                     <b>No Of Shop:  </b>
-                                    {data.no_of_shop}
+                                    {plaza.no_of_shop}
                                 </Label>
                             </Col>
                         </Row> : <Row>
@@ -140,14 +134,6 @@ export default function PlazaView() {
                                         name='name'
                                         value={form.name}
                                         onChange={handleChange} />
-                                </FormGroup>
-                            </Col>
-                            <Col md={4}>
-                                <FormGroup>
-                                    <Label for='' >Code</Label>
-                                    <Input type="text"
-                                        name='code'
-                                        value={form.code} onChange={handleChange} />
                                 </FormGroup>
                             </Col>
                             <Col md={4}>
@@ -180,7 +166,7 @@ export default function PlazaView() {
                             <Col md={4}>
                                 <FormGroup>
                                     <Label for='' >Rent end date</Label>
-                                    <Input type="date" 
+                                    <Input type="date"
                                         name='rent_end_date'
                                         value={form.rent_end_date}
                                         onChange={handleChange} />
@@ -193,16 +179,9 @@ export default function PlazaView() {
                             </Col>
                         </Row>}
                     </CardBody>
-                </Card>
-            </Container>
-            <Container className='mt-3'>
-                <Card>
-                    <center>
-                        <CardHeader>
-                            User Name's Shops
-                        </CardHeader>
-                    </center>
+
                     <CardBody>
+                        <h4> {plaza.name} Phases</h4>
                         <Table bordered>
                             <thead>
                                 <tr>
