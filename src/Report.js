@@ -24,7 +24,7 @@ export default function Report() {
 
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getRayment_report?id=${id}`,
+            `/getRayment_report?id=${id}`,
             (data) => {
                 if (data.success) {
                 }
@@ -72,13 +72,13 @@ export default function Report() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                {result.map((item) =>
-                                    <tr>
-                                        <td>{item.name}</td>
-                                        <td>{item.amount_paid}</td>
-                                        <td>{item.year}</td>
-                                    </tr>
-                                )}
+                                    {result.map((item) =>
+                                        <tr>
+                                            <td>{item.name}</td>
+                                            <td>{item.amount_paid}</td>
+                                            <td>{item.year}</td>
+                                        </tr>
+                                    )}
                                 </tbody>
                             </Table>
                         </Row>

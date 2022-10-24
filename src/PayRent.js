@@ -6,14 +6,14 @@ import { _postApi } from './apiCall'
 import CustomButton from './CustomButton'
 import CustomCardHeader from './CustomCardHeader'
 import useQuery from './helper'
-import {BsArrowLeft} from "react-icons/bs"
+import { BsArrowLeft } from "react-icons/bs"
 
 export default function PayRent() {
     const _form = {
         year: "",
         amount_paid: "",
         discription: "",
-        
+
     }
     const [form, setForm] = useState(_form)
     const [data, setData] = useState([])
@@ -29,7 +29,7 @@ export default function PayRent() {
 
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/get_shop_registration?id=${id}`,
+            `/get_shop_registration?id=${id}`,
             (data) => {
                 if (data.success) {
                     setData(data.results[0])
@@ -41,11 +41,11 @@ export default function PayRent() {
 
 
     }
-let _shop_no = result.shop_no
+    let _shop_no = result.shop_no
     useEffect(() => {
         handleFetch()
-        setForm((p)=>({...p,shop_no: _shop_no}))
-    }, [0,_shop_no])
+        setForm((p) => ({ ...p, shop_no: _shop_no }))
+    }, [0, _shop_no])
     const handleAdd = () => {
         const obj = {
             ...form,
@@ -66,20 +66,20 @@ let _shop_no = result.shop_no
             <Container className='mt-3'>
                 <Card>
                     <center>
-                <CardHeader>
-                    Rent Pay
-                </CardHeader>
-                </center>
+                        <CardHeader>
+                            Rent Pay
+                        </CardHeader>
+                    </center>
                     <CardBody>
                         <Button
-                        color='primary'
-                        onClick={() => navigate("/")}
+                            color='primary'
+                            onClick={() => navigate("/")}
                         >
-                            <BsArrowLeft size='1.5em'/>
-                                  {' '}
+                            <BsArrowLeft size='1.5em' />
+                            {' '}
                             Back
                         </Button>
-                    {/* <CustomCardHeader text='Back' header='Rent Pay' /> */}
+                        {/* <CustomCardHeader text='Back' header='Rent Pay' /> */}
                         <Button
                             onClick={() => navigate(`/report?id=${result.id}`)}
                             style={{ marginLeft: "55rem" }}

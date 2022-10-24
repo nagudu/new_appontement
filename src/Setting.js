@@ -16,7 +16,7 @@ export default function Setting() {
     // const [data, setData] = useState([])
     const [result, setResult] = useState([])
 
-    const handleChange = ({ target: { name, value }}) => {
+    const handleChange = ({ target: { name, value } }) => {
         setForm((p) => ({ ...p, [name]: value }))
     }
     const handleAdd = () => {
@@ -32,7 +32,7 @@ export default function Setting() {
     const toggle = () => setDropdownOpen(!dropdownOpen);
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getsetting`,
+            `/getsetting`,
             (data) => {
                 if (data.success) {
                 }
@@ -59,7 +59,7 @@ export default function Setting() {
                                         Add Shop
                                     </NavLink>
                                 </NavItem>
-                                
+
                                 <NavItem>
                                     <NavLink href="#">Link</NavLink>
                                 </NavItem>
@@ -99,45 +99,45 @@ export default function Setting() {
                         </Row>
                         <center>
                             <Button
-                            onClick={handleAdd}
+                                onClick={handleAdd}
                                 className='mt-3'
                                 color='primary'
-                                >
+                            >
                                 Submit
                             </Button>
                         </center>
                     </CardBody>
-                    
+
                 </Card>
             </Container>
             <Container className='mt-3'>
-                        <Card>
-                            <CardBody>
-                                <Row>
-                                    <Table bordered>
-                                        <thead>
-                                            <tr>
-                                                <th>Shop Name</th>
-                                                <th>Shop No</th>
-                                                <th>Address</th>
-                                                <th>Contact</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            {result.map((item) =>  
-                                            <tr>
-                                                <td>{item.shop_name}</td>
-                                                <td>{item.shops_no}</td>
-                                                <td>{item.address}</td>
-                                                <td>{item.contact}</td>
-                                            </tr>
-                                            )}
-                                        </tbody>
-                                    </Table>
-                                </Row>
-                            </CardBody>
-                        </Card>
-                    </Container>
+                <Card>
+                    <CardBody>
+                        <Row>
+                            <Table bordered>
+                                <thead>
+                                    <tr>
+                                        <th>Shop Name</th>
+                                        <th>Shop No</th>
+                                        <th>Address</th>
+                                        <th>Contact</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {result.map((item) =>
+                                        <tr>
+                                            <td>{item.shop_name}</td>
+                                            <td>{item.shops_no}</td>
+                                            <td>{item.address}</td>
+                                            <td>{item.contact}</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </Table>
+                        </Row>
+                    </CardBody>
+                </Card>
+            </Container>
 
         </div>
     )

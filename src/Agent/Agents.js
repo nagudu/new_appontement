@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { MdEdit } from 'react-icons/md'
 import { AiOutlinePlusCircle } from 'react-icons/ai'
 import { BsArrowLeft } from 'react-icons/bs'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from '../api'
 import { createUser } from '../redux/actions/authActions'
@@ -17,7 +17,7 @@ export default function Agents() {
 		address: "",
 		phone_no: "",
 		phases_no: "",
-		phase_ids: [],
+		phase_ids: "",
 		password: "",
 		query_type: 'create'
 	}
@@ -39,7 +39,7 @@ export default function Agents() {
 
 
 		if (selectedOptions && selectedOptions.length) {
-			setForm((p) => ({ ...p, phase_ids: [more_value ? more_value : value] }))
+			setForm((p) => ({ ...p, phase_ids: more_value ? more_value : value }))
 		} else {
 			setForm((p) => ({ ...p, [name]: value }))
 		}
@@ -84,7 +84,7 @@ export default function Agents() {
 	}
 	const fetchPlazaPhases = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/get-plaza-phase-list`,
+			`/get-plaza-phase-list`,
 			(data) => {
 				if (data.success) {
 					setPhases(data.results)
@@ -103,7 +103,7 @@ export default function Agents() {
 
 	const handleFetch = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/agents?query_type=select-all`,
+			`/agents?query_type=select-all`,
 			(data) => {
 				if (data.success) {
 					setAgents(data.results)
@@ -115,7 +115,7 @@ export default function Agents() {
 	useEffect(() => {
 		handleFetch()
 	}, [0])
-
+	const main_agents = filterText.length > 3 ? agents.filter(agent => agent.name.includes(filterText)) : agents
 	return (
 		<div>
 			<Container className='mt-3'>
@@ -174,8 +174,6 @@ export default function Agents() {
 									<br />
 									<Button className='mt-3' block color='primary' onClick={handleAdd}>Add agent</Button>
 								</Col>
-
-
 							</Row>
 						</CardBody> : <>
 							<CardBody>
@@ -183,16 +181,16 @@ export default function Agents() {
 									<thead>
 										<tr>
 											<th>SN</th>
-											<th>AGENTS</th>
+											<th>AGENT</th>
 											<th>NO. PHASES</th>
-											<th>REVENUE</th>
-											<th>BALANCE</th>
+											<th>REVENUE GENERATED</th>
+											<th>REMAINING BALANCE</th>
 										</tr>
 									</thead>
 									<tbody>
-										{agents.map((ag, idx) => (<tr>
+										{main_agents.map((ag, idx) => (<tr>
 											<td>{idx + 1}</td>
-											<td>{ag.name}</td>
+											<td><Link to={`/agent-view?agent_id=${ag.id}`} >{ag.name}</Link></td>
 											<td>{ag.no_of_phase}</td>
 											<td>{ag.revenue}</td>
 											<td>{ag.balance}</td>
@@ -233,6 +231,6 @@ export default function Agents() {
 					</CardBody>
 				</Card>
 			</Container>
-		</div>
+		</div >
 	)
 }

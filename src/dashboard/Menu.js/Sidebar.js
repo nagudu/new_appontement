@@ -15,7 +15,7 @@ export default function Sidebar() {
             title: 'Dashboard',
             icon: MdDashboard
         },
-      
+
         {
             path: '/reports',
             title: 'Reports',
@@ -26,15 +26,15 @@ export default function Sidebar() {
             title: 'Plazas',
             icon: BsBuilding
         },
-        {
-            path: '/tenants',
-            title: 'Tenants',
-            icon: BsFillPeopleFill
-        },
+        // {
+        //     path: '/tenants',
+        //     title: 'Tenants',
+        //     icon: BsFillPeopleFill
+        // },
         {
             path: '/agents',
             title: 'Agents',
-            icon: BsBuilding
+            icon: BsFillPeopleFill
         },
     ]
     return (

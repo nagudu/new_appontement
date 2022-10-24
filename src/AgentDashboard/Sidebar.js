@@ -15,23 +15,18 @@ export default function Sidebar() {
 
     const routes = [
         {
-            path: '/agent-dashboard', 
+            path: '/agent-dashboard',
             title: 'Dashboard',
             icon: MdDashboard
         },
-      
+
         {
-            path: '/agent-dashboard/payment',
-            title: 'Payment',
+            path: '/agent-dashboard/payments',
+            title: 'Payments',
             icon: MdOutlinePayments
         },
         {
-            path: '/agent-dashboard/repetion',
-            title: 'Repation',
-            icon: MdOutlinePayments
-        },
-        {
-            path: '/agent-dashboard/tenant',
+            path: '/agent-dashboard/tenants',
             title: 'Tenants',
             icon: BsFillPeopleFill
         },
@@ -41,7 +36,7 @@ export default function Sidebar() {
             icon: BsBuilding
         },
     ]
-    return (   
+    return (
         <Nav vertical className='p-0 m-0'>
             <br />
             <br />

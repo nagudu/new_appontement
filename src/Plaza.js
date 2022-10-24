@@ -12,7 +12,7 @@ export default function Plaza() {
     // const navagite = useNavigate()
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/get-plaza-list`,
+            `/get-plaza-list`,
             (data) => {
                 if (data.success) {
                 }
@@ -60,7 +60,7 @@ export default function Plaza() {
                                             <td>{item.no_of_shop}</td>
                                             <td><Button
                                                 color='primary'
-                                                onClick={() => navigate(`/plaza_view?id=${item.id}`)}>
+                                                onClick={() => navigate(`/plaza_view?plaza_id=${item.id}`)}>
                                                 <BsEye size='1em' color='white' />
                                                 {" "}
                                                 View

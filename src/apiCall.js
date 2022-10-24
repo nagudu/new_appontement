@@ -1,4 +1,4 @@
-export const apiUrl = "http://localhost:34567"
+export const apiUrl = ""
 export function _postApi(url, data, success, error) {
     fetch(`${apiUrl}/${url}`, {
         method: "POST",

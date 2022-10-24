@@ -26,13 +26,13 @@ import AgentShops from '../AgentDashboard/AgentShops';
 // import Payment from '../AgentDashboard/Payment';
 import AgentRepetion from '../AgentDashboard/AgentRepetion';
 import AgentPayment from '../AgentDashboard/AgentPayment';
-import AgentTenant from '../AgentDashboard/AgentTenant';
+// import AgentTenant from '../AgentDashboard/AgentTenant';
 import AgentPhases from '../AgentDashboard/AgentPhases';
 
 
 function AppNavigation() {
     // const dispatch = useDispatch()
-    const navigate = useNavigate()
+    // const navigate = useNavigate()
     //     useEffect(() => {
     // dispatch(initUser(() => navigate("/login")))
     //     }, [])
@@ -46,8 +46,6 @@ function AppNavigation() {
                     path: '/',
                     element: <Home />
                 },
-
-
                 {
                     path: '/plazas',
                     element: <Plaza />
@@ -145,12 +143,12 @@ function AppNavigation() {
                     element: <AgentRepetion />
                 },
                 {
-                    path: '/agent-dashboard/payment',
+                    path: '/agent-dashboard/payments',
                     element: <AgentPayment />
                 },
                 {
-                    path: '/agent-dashboard/tenant',
-                    element: <AgentTenant />
+                    path: '/agent-dashboard/tenants',
+                    element: <Tenant />
                 },
                 {
                     path: '/agent-dashboard/phases',

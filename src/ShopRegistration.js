@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Label, Row } from 'reactstrap'
 import _fetchApi from './api'
 import { _postApi } from './apiCall'
-import {BsArrowLeft} from 'react-icons/bs'
+import { BsArrowLeft } from 'react-icons/bs'
 import useQuery from './helper'
 
 export default function ShopRegistration() {
@@ -39,10 +39,10 @@ export default function ShopRegistration() {
     // const [setting, setSetting] = useState([])
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getTenantList`,
+            `/getTenantList`,
             (data) => {
                 if (data.success) {
-                setData(data.results[0])
+                    setData(data.results[0])
                 }
                 console.log(data.results[0])
             }
@@ -56,8 +56,8 @@ export default function ShopRegistration() {
     return (
         <div>
             <Container className='mt-3'>
-                
-            {/* {JSON.stringify(form)} */}
+
+                {/* {JSON.stringify(form)} */}
                 <Card>
                     <center>
                         <CardHeader>
@@ -65,14 +65,14 @@ export default function ShopRegistration() {
                         </CardHeader>
                     </center>
                     <CardBody>
-                            <Button
-                                // style={{ marginRight: "67rem" }}
-                                onClick={() => navigate(`/view_plza_phases?phase_id=${phase_id}`)}
-                                color="primary"
-                            >
-                        <BsArrowLeft size='1.5em'/>
-                                  {' '}Back
-                            </Button>
+                        <Button
+                            // style={{ marginRight: "67rem" }}
+                            onClick={() => navigate(`/view_plza_phases?phase_id=${phase_id}`)}
+                            color="primary"
+                        >
+                            <BsArrowLeft size='1.5em' />
+                            {' '}Back
+                        </Button>
 
                         <Row className='mt-3'>
                             <Col md={6}>
@@ -81,13 +81,13 @@ export default function ShopRegistration() {
                                     value={form.name}
                                     onChange={handleChange} />
                             </Col>
-                         
+
                             <Col md={6}>
                                 <Label>Shop Code</Label>
                                 <Input type='text' name='code'
                                     value={form.code}
                                     onChange={handleChange} />
-                                    {/* {
+                                {/* {
                                         setting && setting.map((i) =>
                                             <option>{i.name}</option>
                                         )
@@ -95,8 +95,8 @@ export default function ShopRegistration() {
                                     <option></option> */}
                                 {/* </Input> */}
                             </Col>
-                          
-                            
+
+
                             <Col md={6}>
                                 <Label>Rent Fee</Label>
                                 <Input type='text' name='rent_fee'
@@ -116,19 +116,19 @@ export default function ShopRegistration() {
                                     onChange={handleChange} />
                             </Col>
 
-                        
-                              <Col md={6}>
+
+                            <Col md={6}>
                                 <Label>Tenant</Label>
                                 <Input type='select' name='tenant_id'
                                     value={form.tenant_id}
                                     onChange={handleChange} >
-                                            {
+                                    {
                                         data && data.map((i) =>
                                             <option value={i.id}>{i.name}</option>
                                         )
                                     }
-                                    <option></option> 
-                                        </Input>
+                                    <option></option>
+                                </Input>
                             </Col>
                         </Row>
                         <center>

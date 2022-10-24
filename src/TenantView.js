@@ -11,19 +11,19 @@ export default function TenantView() {
 	const query = useQuery()
 	const id = query.get('id')
 	const today = moment().format('YYYY-MM-DD')
-	const due_date = moment(today).add('months',12).format('YYYY-MM-DD')
+	const due_date = moment(today).add('months', 12).format('YYYY-MM-DD')
 	const navigate = useNavigate()
 	const _form = {
 		user_id: '',
 		shop_name: "",
 		plaza: "",
 		phase: '',
-		phase_id:'',
-		shop_id:'',
-		plaza_id:'',
-		tenant_id:id,
-		rent_start_date:today,
-		rent_end_date:due_date,
+		phase_id: '',
+		shop_id: '',
+		plaza_id: '',
+		tenant_id: id,
+		rent_start_date: today,
+		rent_end_date: due_date,
 	}
 	const [form, setForm] = useState(_form)
 	const [shop_list, setShopList] = useState([])
@@ -36,38 +36,38 @@ export default function TenantView() {
 
 	const fetchTenantShops = useCallback(() => {
 		_fetchApi(
-		`http://localhost:34567/get-tenant-shops?tenant_id=${form.tenant_id}&query_type=select-tenant-shops`,
+			`/get-tenant-shops?tenant_id=${form.tenant_id}&query_type=select-tenant-shops`,
 			(data) => {
 				if (data.success) {
 					setTenantShops(data.results)
-				}else{
+				} else {
 					setTenantShops([])
 				}
 			}
 		)
-	},[form.tenant_id])
+	}, [form.tenant_id])
 
 
 
 	const fetchShops = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/get-phase-shops?phase_id=${form.phase_id}`,
+			`/get-phase-shops?phase_id=${form.phase_id}`,
 			(data) => {
 				if (data.success) {
 					setShops(data.results)
-				}else{
+				} else {
 					setShops([])
 				}
 			}
 		)
-	},[form.phase_id])
+	}, [form.phase_id])
 	// const navagite = useNavigate()
 	const fetchPlazaPhases = useCallback(() => {
-		_fetchApi(`http://localhost:34567/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
+		_fetchApi(`/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
 			(resp) => {
 				if (resp.success) {
 					setPhases(resp.results)
-				}else{
+				} else {
 					setPhases([])
 				}
 			})
@@ -77,11 +77,11 @@ export default function TenantView() {
 
 	const fetchPlazas = () => {
 		_fetchApi(
-			`http://localhost:34567/get-plaza-list`,
+			`/get-plaza-list`,
 			(data) => {
 				if (data.success) {
 					setPlazas(data.results)
-				}else{
+				} else {
 					setPlazas([])
 				}
 			}
@@ -99,15 +99,15 @@ export default function TenantView() {
 	useEffect(() => {
 		fetchPlazas()
 	}, [0])
-	
+
 	useEffect(() => {
 		fetchTenantShops()
 	}, [fetchTenantShops])
-	
+
 	const [result, setResult] = useState([])
 	const handleFetch = () => {
 		_fetchApi(
-			`http://localhost:34567/getTenant?id=${id}`,
+			`/getTenant?id=${id}`,
 			(data) => {
 				if (data.success) {
 
@@ -120,14 +120,14 @@ export default function TenantView() {
 	}
 
 	const handleChange = ({ target: { name, value } }) => {
-		if(name==='plaza_id'){
-			let selected_plaza = plazas.filter(p=>p.id==value)
-			console.error({selected_plaza});
-			setForm((p)=>({...p, plaza_name: selected_plaza.length? selected_plaza[0].name:""}))
-		}else if(name==='shop_id'){
-			let selected_shop = shops.filter(p=>p.id==value)
-			console.error({selected_shop});
-			setForm((p)=>({...p, shop_name: selected_shop.length? selected_shop[0].code:"", rent_fee:selected_shop[0].rent_fee}))
+		if (name === 'plaza_id') {
+			let selected_plaza = plazas.filter(p => p.id == value)
+			console.error({ selected_plaza });
+			setForm((p) => ({ ...p, plaza_name: selected_plaza.length ? selected_plaza[0].name : "" }))
+		} else if (name === 'shop_id') {
+			let selected_shop = shops.filter(p => p.id == value)
+			console.error({ selected_shop });
+			setForm((p) => ({ ...p, shop_name: selected_shop.length ? selected_shop[0].code : "", rent_fee: selected_shop[0].rent_fee }))
 		}
 		setForm((p) => ({ ...p, [name]: value }))
 	}
@@ -136,14 +136,16 @@ export default function TenantView() {
 		handleFetch()
 	}, [])
 
-	const addShop =  () =>{
-		if( shop_list.filter(s=>s.shop_name===form.shop_name).length<1)
-		setShopList((p)=>([...p, 
-			{shop_name:form.shop_name,
-			plaza_name:form.plaza_name,
-			rent_fee:form.rent_fee,
-			shop_id:form.shop_id}
-		]))
+	const addShop = () => {
+		if (shop_list.filter(s => s.shop_name === form.shop_name).length < 1)
+			setShopList((p) => ([...p,
+			{
+				shop_name: form.shop_name,
+				plaza_name: form.plaza_name,
+				rent_fee: form.rent_fee,
+				shop_id: form.shop_id
+			}
+			]))
 	}
 
 
@@ -249,8 +251,8 @@ export default function TenantView() {
 									}
 								</Input>
 							</Col>
-							</Row>
-							<Row>
+						</Row>
+						<Row>
 
 							<Col md={3}>
 								<Label>Rent start date</Label>
@@ -273,41 +275,41 @@ export default function TenantView() {
 									value={form.deposite}
 									onChange={handleChange} />
 							</Col>
-							</Row>
-							<Row>
+						</Row>
+						<Row>
 							<Col>
-							<Button
-								color='primary'
-								style={{marginTop:32}}
-								onClick={addShop}>
+								<Button
+									color='primary'
+									style={{ marginTop: 32 }}
+									onClick={addShop}>
 									Add shop
-							</Button>
+								</Button>
 							</Col>
 						</Row>
 					</CardBody>
 					<CardBody>
 						<Row>
-						{shop_list.length ? <Table bordered>
-							<thead>
-								<tr>
-									<th>S/N</th>
-									<th>Plaza name</th>
-									<th>Shop name</th>
-									<th>Rent fee</th>
-								</tr>
-							</thead>
-							<tbody>
-								{shop_list.map((item,idx) =>
+							{shop_list.length ? <Table bordered>
+								<thead>
 									<tr>
-										<td>{idx+1}</td>
-										<td>{item.plaza_name}</td>
-										<td>{item.shop_name}</td>
-										<td className='text-right'>{item.rent_fee}</td>
+										<th>S/N</th>
+										<th>Plaza name</th>
+										<th>Shop name</th>
+										<th>Rent fee</th>
 									</tr>
-								)}
-							</tbody>
-						</Table> :
-							<h4 className='text-warning text-center'> Please add more shop</h4>}
+								</thead>
+								<tbody>
+									{shop_list.map((item, idx) =>
+										<tr>
+											<td>{idx + 1}</td>
+											<td>{item.plaza_name}</td>
+											<td>{item.shop_name}</td>
+											<td className='text-right'>{item.rent_fee}</td>
+										</tr>
+									)}
+								</tbody>
+							</Table> :
+								<h4 className='text-warning text-center'> Please add more shop</h4>}
 						</Row>
 						<center><Button
 							color='primary'
@@ -317,7 +319,7 @@ export default function TenantView() {
 						</Button></center>
 					</CardBody>
 					<CardBody>
-					{tenant_shops.length ? <Table bordered>
+						{tenant_shops.length ? <Table bordered>
 							<thead>
 								<tr>
 									<th>S/N</th>
@@ -327,9 +329,9 @@ export default function TenantView() {
 								</tr>
 							</thead>
 							<tbody>
-								{tenant_shops.map((item,idx) =>
+								{tenant_shops.map((item, idx) =>
 									<tr>
-										<td>{idx+1}</td>
+										<td>{idx + 1}</td>
 										<td>{item.plaza_name}</td>
 										<td>{item.shop_name}</td>
 										<td className='text-right'>{item.rent_fee}</td>

@@ -1,26 +1,31 @@
 // import { isCursorAtEnd } from '@testing-library/user-event/dist/utils'
 import React, { useCallback, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, FormGroup, Input, Label, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 import useQuery from './helper'
 import { BsArrowLeft, BsEye, BsPlusCircle } from "react-icons/bs"
 import { _postApi } from './apiCall'
+import moment from 'moment'
+import CustomCardHeader from './CustomCardHeader'
+import { CustomButton } from './components/UI'
 
 export default function PlazaView() {
 
     const [plaza, setPlaza] = useState([])
     const [phases, setPhases] = useState([])
     const query = useQuery()
-    const plaza_id = query.get('id')
+    const plaza_id = query.get('plaza_id')
+    const today = moment().format('YYYY-MM-DD')
+    const date = { from: today, to: moment(today).add(12, 'months').format('YYYY-MM-DD') }
     const _form = {
         code: plaza.code,
-        name: '',
+        name: plaza.name,
         no_of_shops: '',
         plaza_id,
         rent_fee: null,
-        rent_start_date: null,
-        rent_end_date: null
+        rent_start_date: date.from,
+        rent_end_date: date.to
     }
     const navigate = useNavigate()
     const [form, setForm] = useState(_form)
@@ -35,8 +40,8 @@ export default function PlazaView() {
         _postApi("plaza_phases?query_type=create", form, (resp) => {
             if (resp.success) {
                 setForm(_form)
-                fetchPlazaPhases()
-                handleFetch()
+                getPlaza()
+                getPhases()
                 alert("Success");
                 setViewPhase(!viewPhase)
             }
@@ -51,62 +56,53 @@ export default function PlazaView() {
         // fetchPlazas()
     }, [0])
     // const [result, setResult] = useState([])
-    const fetchPlazaPhases = useCallback(() => {
+    const getPlaza = useCallback(() => {
         _fetchApi(
-            `http://localhost:34567/getPlaza?id=${plaza_id}`,
+            `/getPlaza?plaza_id=${plaza_id}`,
             (plaza) => {
                 if (plaza.success) {
                     setPlaza(plaza.results[0])
-                    setForm((p) => ({ ...p, code: plaza.results[0].code }))
+                    setForm((p) => ({ ...p, code: plaza.results[0].code, name: plaza.results[0].name }))
                 }
             })
     }, [plaza_id])
 
     useEffect(() => {
-        fetchPlazaPhases()
+        getPlaza()
     }, [0])
 
-    const handleFetch = () => {
+    const getPhases = () => {
         _fetchApi(
-            `http://localhost:34567/get-plaza-phase-list`,
+            `/get_plaza_phases?query_type=list-by-plaza&plaza_id=${plaza_id}`,
             (plaza) => {
                 if (plaza.success) {
                     setPhases(plaza.results)
                 }
             }
         )
-
-
     }
     useEffect(() => {
-        handleFetch()
-    }, [])
+        getPhases()
+    }, [0])
     return (
         <div>
             <Container className='mt-3'>
                 <Card>
-                    <center>
-                        <CardHeader>
-                            Plaza View
-                        </CardHeader>
-                    </center>
+                    <CustomCardHeader>
+                        <Row>
+                            <Col md={9}>{`${plaza.name} Plaza` || ' Plaza View'}</Col>
+                            <Col md={3} className='text-right'>
+                                <CustomButton outline
+                                    color='primary'
+                                    onClick={() => setViewPhase(!viewPhase)}>
+                                    <BsPlusCircle size='1.5em' />
+                                    {' '}
+                                    Add phase
+                                </CustomButton>
+                            </Col>
+                        </Row>
+                    </CustomCardHeader>
                     <CardBody>
-                        <Button
-                            color='primary'
-                            onClick={() => navigate(-1)}>
-                            <BsArrowLeft size='1.5em' />
-                            {' '}
-                            Back
-                        </Button>
-                        {' '}
-
-                        <Button
-                            color='primary'
-                            onClick={() => setViewPhase(!viewPhase)}>
-                            <BsPlusCircle size='1.5em' />
-                            {' '}
-                            Add phase
-                        </Button>
                         {!viewPhase ? <Row className='mt-3'>
                             <Col md={4}>
                                 <Label><b>Name:  </b>
@@ -179,37 +175,34 @@ export default function PlazaView() {
                             </Col>
                         </Row>}
                     </CardBody>
-
                     <CardBody>
-                        <h4> {plaza.name} Phases</h4>
-                        <Table bordered>
-                            <thead>
-                                <tr>
-                                    <th>S/N</th>
-                                    <th>Name</th>
-                                    <th>Code</th>
-                                    <th>No Of Shop</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {phases.map((item, i) =>
-                                    <tr key={i}>
-                                        <td>{i + 1}</td>
-                                        <td>{item.name}</td>
-                                        <td>{item.code}</td>
-                                        <td>{item.no_of_shops}</td>
-                                        <td><Button color='primary'
-                                            onClick={() => navigate(`/view_plza_phases?phase_id=${item.id}&phase_code=${item.code}`)}
-                                        >
-                                            <BsEye size='1em' color='white' />
-                                            {' '}
-                                            View</Button></td>
-                                    </tr>
-                                )}
-                            </tbody>
+                        {phases.length > 0 ?
+                            <>
+                                <h4> {plaza.name} Phases</h4>
+                                <Table bordered>
+                                    <thead>
+                                        <tr>
+                                            <th width="3%">S/N</th>
+                                            <th>Name</th>
+                                            <th>Code</th>
+                                            <th>No Of Shop</th>
+                                            <th>Rent fee</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {phases.map((item, i) =>
+                                            <tr key={i}>
+                                                <td>{i + 1}</td>
+                                                <td><Link to={`/view_plza_phases?phase_id=${item.id}&phase_code=${item.code}&plaza_id=${plaza_id}`}>{item.name}</Link></td>
+                                                <td>{item.code}</td>
+                                                <td>{item.no_of_shops}</td>
+                                                <td className='text-right'>{item.rent_fee}</td>
+                                            </tr>
+                                        )}
+                                    </tbody>
 
-                        </Table>
+                                </Table>
+                            </> : <h4>Phases not available</h4>}
                     </CardBody>
                 </Card>
             </Container>

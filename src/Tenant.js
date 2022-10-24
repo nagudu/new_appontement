@@ -3,22 +3,22 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 // import CustomButton from './CustomButton'
-import {AiOutlinePlusCircle} from 'react-icons/ai'
-import {GrFormView} from 'react-icons/gr'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
+import { GrFormView } from 'react-icons/gr'
 import { BsEye } from 'react-icons/bs'
 
 export default function Tenant() {
     const navigate = useNavigate()
-    
+
     const [result, setResult] = useState([])
     const navagite = useNavigate()
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getTenantList`,
+            `/getTenantList`,
             (data) => {
                 if (data.success) {
                 }
-                console.log(data.results)
+                // console.log(data.results)
                 setResult(data.results[0])
             }
         )
@@ -35,9 +35,9 @@ export default function Tenant() {
                     <center><CardHeader>Tenant</CardHeader></center>
                     <CardBody>
                         <Button color='primary' onClick={() => navagite("/tenant_registration")}>
-                        <AiOutlinePlusCircle size='1.5em'/>
-                           {" "} Add New Tenant
-                            </Button>
+                            <AiOutlinePlusCircle size='1.5em' />
+                            {" "} Add New Tenant
+                        </Button>
                         <Row className='mt-3'>
                             <Table bordered>
                                 <thead>
@@ -51,22 +51,22 @@ export default function Tenant() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {result.map((item,index) =>
-                                    <tr>
-                                    <td>{index+1}</td>
-                                    <td>{item.name}</td>
-                                    <td>{item.phone_no}</td>
-                                    <td>{item.email}</td>
-                                    <td>{item.address}</td>
-                                    <td><Button
-                                    color='primary'
-                                     onClick={() => navigate(`/tenant_view?id=${item.id}`)}>
-                                         <BsEye size='1em' color='white'/>
+                                    {result.map((item, index) =>
+                                        <tr>
+                                            <td>{index + 1}</td>
+                                            <td>{item.name}</td>
+                                            <td>{item.phone_no}</td>
+                                            <td>{item.email}</td>
+                                            <td>{item.address}</td>
+                                            <td><Button
+                                                color='primary'
+                                                onClick={() => navigate(`/tenant_view?id=${item.id}`)}>
+                                                <BsEye size='1em' color='white' />
                                                 {" "}
-                                        View 
-                                     </Button>
-                                     </td>
-                                    </tr>
+                                                View
+                                            </Button>
+                                            </td>
+                                        </tr>
                                     )}
                                 </tbody>
                             </Table>

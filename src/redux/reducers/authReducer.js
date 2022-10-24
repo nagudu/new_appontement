@@ -1,5 +1,5 @@
 // USERsReducer.js
-import { CREATE_USER, UPDATE_USER, DELETE_USER, AUTH_USER, LOGOUT } from '../actions/authConstants'
+import { CREATE_USER, UPDATE_USER, UPDATE_USERS, DELETE_USER, AUTH_USER, LOGOUT } from '../actions/authConstants'
 
 const defaultState = {
 	user: {},

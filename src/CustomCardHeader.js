@@ -10,8 +10,8 @@ export default function CustomCardHeader(props) {
                     <Col md={2}>
                         <CustomButton text={props.text} />
                     </Col>
-                    <Col  md={8} className='text-center'>
-                        <p style={{fontSize:'22px'}} className=''>{props.header}</p>
+                    <Col md={8} className='text-center'>
+                        <p style={{ fontSize: '22px' }} className=''>{props.children}</p>
                     </Col>
                     {/* <Col></Col> */}
                 </Row>

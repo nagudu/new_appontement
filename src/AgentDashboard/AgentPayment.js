@@ -15,6 +15,7 @@ export default function AgentPayment() {
         balance: "",
         amount_paid: "",
         discription: "",
+        discount: "",
     }
     const [form, setForm] = useState(_form)
     const [showPaymentForm, setShowPaymentForm] = useState(false)
@@ -36,7 +37,7 @@ export default function AgentPayment() {
     }
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getTenantList`,
+            `/getTenantList`,
             (data) => {
                 if (data.success) {
                 }

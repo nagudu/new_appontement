@@ -3,8 +3,8 @@ import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Container, Row, Table } from 'reactstrap'
 import _fetchApi from './api'
 // import CustomButton from './CustomButton'
-import {GrFormView} from "react-icons/gr"
-import {AiOutlinePlusCircle} from "react-icons/ai"
+import { GrFormView } from "react-icons/gr"
+import { AiOutlinePlusCircle } from "react-icons/ai"
 import { BsEye } from 'react-icons/bs'
 
 export default function Managers() {
@@ -13,7 +13,7 @@ export default function Managers() {
     const navagite = useNavigate()
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/getManager`,
+            `/getManager`,
             (data) => {
                 if (data.success) {
                 }
@@ -36,8 +36,8 @@ export default function Managers() {
                         <Button color='primary'
                             onClick={() => navagite("/managers_user")}
                         >
-                            <AiOutlinePlusCircle size='1.5em'/>
-                           {" "} 
+                            <AiOutlinePlusCircle size='1.5em' />
+                            {" "}
                             Add New Manager
                         </Button>
                         <Row className='mt-3'>
@@ -62,9 +62,9 @@ export default function Managers() {
                                             <td>{item.address}</td>
                                             <td><Button
                                                 color='primary'
-                                                onClick={()=> navagite('/manager_view')}
+                                                onClick={() => navagite('/manager_view')}
                                             >
-                                                <BsEye size='1em' color='white'/>
+                                                <BsEye size='1em' color='white' />
                                                 {" "}
                                                 View
                                             </Button>

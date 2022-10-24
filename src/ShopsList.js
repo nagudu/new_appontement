@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button, Card, CardBody, CardHeader, Col, Container, Input, Table, } from 'reactstrap'
 import _fetchApi from './api'
-import {AiOutlinePlusCircle} from 'react-icons/ai'
+import { AiOutlinePlusCircle } from 'react-icons/ai'
 
 export default function ShopsList() {
     const navigate = useNavigate()
@@ -10,7 +10,7 @@ export default function ShopsList() {
 
     const handleFetch = () => {
         _fetchApi(
-            `http://localhost:34567/get_shop_list`,
+            `/get_shop_list`,
             (data) => {
                 if (data.success) {
                     console.log(data.results)
@@ -32,9 +32,9 @@ export default function ShopsList() {
                     <CardBody>
                         <Button
                             onClick={() => navigate("/shopregistratin")}
-                        color="primary"
+                            color="primary"
                         >
-                            <AiOutlinePlusCircle size='1.5em'/>
+                            <AiOutlinePlusCircle size='1.5em' />
                             {" "} Add Shop</Button>
                         <Row>
 
@@ -77,8 +77,8 @@ export default function ShopsList() {
                                         >
                                             <center>
                                                 <b className='pay'>Payment</b>
-                                                </center>
-                                                </p>
+                                            </center>
+                                        </p>
                                         </td>
                                     </tr>
                                 )}

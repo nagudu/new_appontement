@@ -57,7 +57,7 @@ export default function TenantRegistration() {
 	}
 	const fetchPlazas = () => {
 		_fetchApi(
-			`http://localhost:34567/get-plaza-list`,
+			`/get-plaza-list`,
 			(resp) => {
 				if (resp.success) {
 					setPlazas(resp.results)
@@ -73,7 +73,7 @@ export default function TenantRegistration() {
 
 	const fetchShops = useCallback(() => {
 		_fetchApi(
-			`http://localhost:34567/get-phase-shops?phase_id=${form.phase_id}`,
+			`/get-phase-shops?phase_id=${form.phase_id}`,
 			(resp) => {
 				if (resp.success) {
 					setShops(resp.results)
@@ -89,7 +89,7 @@ export default function TenantRegistration() {
 	}, [fetchShops])
 
 	const fetchPhases = useCallback(() => {
-		_fetchApi(`http://localhost:34567/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
+		_fetchApi(`/get-plaza-phase-list?plaza_id=${form.plaza_id}`,
 			(resp) => {
 				if (resp.success) {
 					setPhases(resp.results)
@@ -122,19 +122,19 @@ export default function TenantRegistration() {
 				<Card>
 					{/* {JSON.stringify({ form, shop_list })} */}
 					<center>
-					<CardHeader >
-                    <Row>
-                        <Col md={4}><Button
-                        onClick={() => navigate(-1)}
-                        color='primary'
-                        >
-                             <BsArrowLeft size='1.5em'/>
-                                  {' '}
-                           
-                            Back</Button></Col>
-                        <Col md={4}>Tenant Registration</Col>
-                    </Row>
-                    </CardHeader>
+						<CardHeader >
+							<Row>
+								<Col md={4}><Button
+									onClick={() => navigate(-1)}
+									color='primary'
+								>
+									<BsArrowLeft size='1.5em' />
+									{' '}
+
+									Back</Button></Col>
+								<Col md={4}>Tenant Registration</Col>
+							</Row>
+						</CardHeader>
 					</center>
 					<CardBody>
 						{/* <Button
