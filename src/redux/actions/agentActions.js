@@ -4,8 +4,9 @@ import { CREATE_AGENT, UPDATE_AGENT, DELETE_AGENT } from './agentConstants'
 
 
 export const getAgents = (obj) => {
+  const url_data = Object.keys(obj).map(k => `${k}=${obj[k]}`)
   _fetchApi(
-    `/getTenantList?${URL_DATA}`,
+    `/getTenantList?${url_data}`,
     (data) => {
       if (data.success) {
       }
